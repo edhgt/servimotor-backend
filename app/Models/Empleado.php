@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Empleado extends Model
 {
+    /** @use HasFactory<\Database\Factories\ColorFactory> */
+    use HasFactory;
     use SoftDeletes;
     
     protected $fillable = [
@@ -20,7 +23,6 @@ class Empleado extends Model
         'fecha_nacimiento',
         'direccion',
         'telefono',
-        'correo',
         'fecha_contratacion',
         'puesto_id',
         'sucursal_id',

@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function cliente(): HasOne
     {
-        return $this->hasOne(ClienteDetalle::class);
+        return $this->hasOne(Cliente::class);
     }
 
 

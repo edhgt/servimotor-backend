@@ -4,18 +4,22 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Categoria;
 use App\Models\Cliente;
 use Illuminate\Database\Seeder;
 
 use App\Models\Color;
+use App\Models\Inventario;
 use App\Models\Marca;
 use App\Models\Modelo;
+use App\Models\Producto;
 use App\Models\Sucursal;
 use App\Models\TipoCombustible;
 use App\Models\TipoMotor;
 use App\Models\TipoTransmision;
 use App\Models\TipoUsuario;
 use App\Models\TipoVehiculo;
+use App\Models\UnidadMedida;
 use App\Models\User;
 use App\Models\Vehiculo;
 
@@ -29,16 +33,24 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
+            CategoriaSeeder::class,
             ColorSeeder::class,
             ClienteSeeder::class,
+            EstadoSeeder::class,
+            InventarioSeeder::class,
             MarcaSeeder::class,
             ModeloSeeder::class,
+            ProductoSeeder::class,
             PuestoSeeder::class,
+            ServicioSeeder::class,
             SucursalSeeder::class,
+            TipoDocumentoSeeder::class,
             TipoMotorSeeder::class,
             TipoTransmisionSeeder::class,
             TipoUsuarioSeeder::class,
             TipoVehiculoSeeder::class,
+            FormaPagoSeeder::class,
+            UnidadMedidaSeeder::class,
             VehiculoSeeder::class,
         ]);
 
@@ -50,8 +62,12 @@ class DatabaseSeeder extends Seeder
                 'sucursal_id' => Sucursal::factory()->create()->id
             ]);
 
+            Categoria::factory()->count(5)->create();
             Color::factory()->count(10)->create();
             Cliente::factory()->count(1)->create();
+            UnidadMedida::factory()->count(5)->create();
+            Producto::factory()->count(500)->create();
+            Inventario::factory()->count(100)->create();
             Marca::factory()->count(10)->create();
             Modelo::factory()->count(10)->create();
             Sucursal::factory()->count(10)->create();

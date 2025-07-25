@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->string('nit')->nullable();
-            $table->string('cui')->nullable();
+            $table->string('cui')->nullable()->unique();
             $table->string('primer_nombre');
             $table->string('segundo_nombre')->nullable();
             $table->string('primer_apellido');
