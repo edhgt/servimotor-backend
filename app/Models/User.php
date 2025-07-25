@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tipo_usuario_id',
+        'sucursal_id',
     ];
 
     /**
@@ -47,4 +51,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tipoUsuario(): BelongsTo
+    {
+        return $this->belongsTo(TipoUsuario::class);
+    }
+
+    public function sucursal(): BelongsTo
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+
+    public function empleado(): HasOne
+    {
+        return $this->hasOne(Empleado::class);
+    }
+
+    public function cliente(): HasOne
+    {
+        return $this->hasOne(ClienteDetalle::class);
+    }
+
+
 }
