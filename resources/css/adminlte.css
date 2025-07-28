@@ -1,0 +1,18 @@
+@import 'overlayscrollbars/overlayscrollbars.css';
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+/* @import 'bootstrap/dist/css/bootstrap.min.css'; */
+@import "admin-lte/dist/css/adminlte.min.css";
+@import '@sweetalert2/theme-bootstrap-4/bootstrap-4.min.css';
+@import "vue-toastification/dist/index.css";
+
+span[role="alert"] {
+    /* display: block; */
+    color: var(--bs-red);
+    margin-bottom: 0px;
+}
+
+.active-bg {
+    color: var(--lte-sidebar-menu-active-color);
+    background-color: var(--lte-sidebar-menu-active-bg);
+}
+
