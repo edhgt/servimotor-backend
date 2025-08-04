@@ -19,6 +19,9 @@ php artisan migrate --seed
 
 # si se desaea reinstalar la base de datos
 php artisan migrate:fresh --seed
+
+# instalar jwt secret
+php artisan jwt:secret
 ```
 
 ## Instalación desde cero de forma automática e interactiva

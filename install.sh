@@ -47,4 +47,6 @@ fi
 # Ejecutar las migraciones y sembrar la base de datos
 php artisan migrate --seed
 
+php artisan jwt:secret
+
 echo "Instalación y configuración completadas con éxito."
