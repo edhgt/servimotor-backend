@@ -3,14 +3,21 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
 
-//Route::post('login', [App\Http\Controllers\Api\Auth\LoginController::class, 'login'])->name('login');
+Route::middleware('auth:sanctum')->group(function () {
+	Route::get('/user', function (Request $request) {
+		$user = auth()->user();
+		
+		if($user->hasRole('Super Admin')) {
+			$user['permissions'] = \Spatie\Permission\Models\Permission::all();
+		} else {
+			$user['permissions'] = $user->getPermissionsViaRoles();
+		}
+	
+		return $user;
+	})->name('user');
 
-Route::prefix('v1')->middleware('auth:api')->group(function() {
-    Route::get('me', [App\Http\Controllers\Api\Auth\LoginController::class, 'me'])->name('me');
+	Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
 
-    Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
 });
+

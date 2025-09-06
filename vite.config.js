@@ -9,8 +9,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/css/adminlte.css',
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/adminlte.js',
             ],
             refresh: true,
         }),

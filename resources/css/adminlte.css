@@ -1,0 +1,9 @@
+@import 'overlayscrollbars/overlayscrollbars.css';
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import "admin-lte/dist/css/adminlte.min.css";
+@import "vue-toastification/dist/index.css";
+
+span[role="alert"] {
+    color: var(--bs-red);
+    margin-bottom: 0px;
+}

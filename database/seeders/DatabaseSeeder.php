@@ -8,6 +8,8 @@ use App\Models\Categoria;
 use App\Models\Cliente;
 use Illuminate\Database\Seeder;
 
+use Spatie\Permission\Models\Role;
+
 use App\Models\Color;
 use App\Models\Inventario;
 use App\Models\Marca;
@@ -52,15 +54,20 @@ class DatabaseSeeder extends Seeder
             FormaPagoSeeder::class,
             UnidadMedidaSeeder::class,
             VehiculoSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
         ]);
 
         if (app()->environment('local', 'development')) {
-            User::factory()->create([
+            $user = User::factory()->create([
                 'name' => 'Test User',
                 'email' => 'test@example.com',
                 'tipo_usuario_id' => TipoUsuario::first()->id,
                 'sucursal_id' => Sucursal::factory()->create()->id
             ]);
+
+            $role = Role::find(1);
+            $user->assignRole($role);
 
             Categoria::factory()->count(5)->create();
             Color::factory()->count(10)->create();

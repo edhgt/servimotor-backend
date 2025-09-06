@@ -21,12 +21,6 @@
           <li class="nav-item">
             <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"><i class="bi bi-list"></i></a>
           </li>
-          <li class="nav-item d-none d-md-block">
-            <a href="https://intranet.mineco.gob.gt" class="nav-link" target="_blank">Intranet</a>
-          </li>
-          <li class="nav-item d-none d-md-block">
-            <a href="https://otrs.mineco.gob.gt" class="nav-link" target="_blank">Ayuda</a>
-          </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -50,7 +44,7 @@
             alt="AdminLTE Logo"
             class="brand-image opacity-75 shadow rounded" height="45"
           />
-          <span class="brand-text fw-light">{{env('APP_NAME')}}</span>
+          <span class="brand-text fw-light">{{config('app.name')}}</span>
         </a>
       </div>
       <sidebar></sidebar>
