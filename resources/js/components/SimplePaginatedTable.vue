@@ -69,7 +69,9 @@ export default {
     Pagination
   },
   props: {
-    laravelResponse: { type: Object, required: true, default: { data: [], meta: { per_page: 5, from: null, to: null}, links: { prev: null, next: null}}},
+    laravelResponse: { type: Object, required: true, default: {
+      data: [], meta: { per_page: 5, from: null, to: null}, links: { prev: null, next: null}}
+    },
     columns: { type: Array as () => { key: string; label: string, thClass: string, thStyle: ThHTMLAttributes }[], required: true },
     searchable: { type: Boolean, default: true },
     paginable: { type: Boolean, default: true },
@@ -94,8 +96,6 @@ export default {
         return value.toString().toLowerCase().includes(query);
       }));
     });
-
-    console.log(props.laravelResponse)
 
     const handlePageChange = (url: string) => {
       context.emit('change-page', `${url}&per_page=${laravelResponse.value.per_page}`);

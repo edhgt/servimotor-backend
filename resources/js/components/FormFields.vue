@@ -8,6 +8,7 @@
                 v-model="field.value"
                 :url="attrs.optionsUrl"
                 :multiple="attrs.multiple"
+                :label="attrs.labelField"
                 v-if="attrs.optionsUrl"
             />
             <v-select
@@ -16,6 +17,7 @@
                 :options="attrs.options"
                 :reduce="item => item.code"
                 :multiple="attrs.multiple"
+                :label="attrs.labelField"
                 v-else
             />
         </Field>

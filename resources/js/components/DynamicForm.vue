@@ -3,16 +3,10 @@
     <div class="row" v-if="schema.fields">
       <FormFields :fields="schema.fields" />
     </div>
-    <template v-if="schema.sections">
-      <div class="card mb-4" v-for="(section, idx) in schema.sections" :key="idx">
-        <div class="card-body p-4">
-          <fieldset>
-            <legend>{{ section.title }}</legend>
-            <div class="row">
-              <FormFields :fields="section.fields" />
-            </div>
-          </fieldset>
-        </div>
+    <template v-if="schema.sections" v-for="(section, idx) in schema.sections" :key="idx">
+      <legend>{{ section.title }}</legend>
+      <div class="row">
+        <FormFields :fields="section.fields" />
       </div>
     </template>
     <button class="btn btn-primary">{{schema.submitText}}</button>
@@ -82,6 +76,7 @@ export default defineComponent({
       () => props.initialValues,
       (newValues) => {
         setValues(newValues);
+        console.log(newValues)
       },
       { deep: true, immediate: true }
     );

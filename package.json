@@ -8,7 +8,7 @@
     "dependencies": {
         "@vee-validate/i18n": "^4.15.1",
         "@vee-validate/rules": "^4.15.1",
-        "admin-lte": "^4.0.0-rc4",
+        "admin-lte": "^4.0.0-beta3",
         "axios": "^1.11.0",
         "bootstrap": "^5.3.8",
         "bootstrap-icons": "^1.13.1",

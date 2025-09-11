@@ -88,19 +88,19 @@ export default {
         const apiUrl = '/api/roles';
         const modal = ref({ title: 'Agregar rol', isVisible: false});
         const state = reactive({
-            laravelResponse: { per_page: 5, data: []},
+            laravelResponse: { meta: { per_page: 5}, data: [], links: { prev: null, next: null }},
             permissions: [],
         });
         const columns = [
             { key: 'id', label: 'ID'},
-            { key: 'name', label: 'Nombre'},
+            { key: 'nombre', label: 'Nombre'},
             { key: 'guard_name', label: 'Guard name'},
             { key: 'permissions', label: 'Permisos', thStyle: 'width:30%'},
         ];
         const { values: correlativoForm, handleSubmit, setFieldValue, setValues, setFieldError, resetForm} = useForm();
 
         const index = (url) => {
-            const apiUrlIndex = url ? url : `${apiUrl}?per_page=${state.laravelResponse.per_page}`;
+            const apiUrlIndex = url ? url : `${apiUrl}?per_page=${state.laravelResponse.meta.per_page}`;
             axios.get(apiUrlIndex)
             .then(response => {
                 state.laravelResponse = response.data;

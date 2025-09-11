@@ -7,6 +7,7 @@ import { localize, setLocale } from '@vee-validate/i18n';
 import es from '@vee-validate/i18n/dist/locale/es.json';
 
 import './bootstrap';
+
 import router from './router';
 import ContentHeader from './components/layout/ContentHeader.vue';
 import UserMenu from './components/layout/UserMenu.vue';

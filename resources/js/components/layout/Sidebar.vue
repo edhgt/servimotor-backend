@@ -45,26 +45,26 @@ export default {
 
         const fullMenu = [
             { permission: "home", route: { name: "home" }, icon: "bi-house", label: "Inicio" },
-            { permission: "reservar", route: { name: 'ReservarDocumento' }, icon: "bi-hand-index-thumb", label: "Reservar" },
-            { permission: "busqueda", route: { name: "BuscarDocumento" }, icon: "bi-search", label: "Búsqueda" },
-            { permission: "mis-documentos", route: { name: "MisDocumentos", query: { type: 1 } }, icon: "bi-file-earmark-person", label: "Mis documentos" },
-            { permission: "pendientes", route: { name: "DocumentosPendientes", query: { type: 1 } }, icon: "bi-clock", label: "Pendientes" },
-            { permission: "documentos", route: { name: "Documentos", query: { type: 1 } }, icon: "bi-files", label: "Documentos" },
-            { permission: "reportes", route: { name: "Reportes" }, icon: "bi-file-bar-graph", label: "Reportes" },
-            { permission: "bitacora", route: { name: "Bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
+            // { permission: "reservar", route: { name: 'ReservarDocumento' }, icon: "bi-hand-index-thumb", label: "Reservar" },
+            // { permission: "busqueda", route: { name: "BuscarDocumento" }, icon: "bi-search", label: "Búsqueda" },
+            // { permission: "mis-documentos", route: { name: "MisDocumentos", query: { type: 1 } }, icon: "bi-file-earmark-person", label: "Mis documentos" },
+            // { permission: "pendientes", route: { name: "DocumentosPendientes", query: { type: 1 } }, icon: "bi-clock", label: "Pendientes" },
+            // { permission: "documentos", route: { name: "Documentos", query: { type: 1 } }, icon: "bi-files", label: "Documentos" },
+            // { permission: "reportes", route: { name: "Reportes" }, icon: "bi-file-bar-graph", label: "Reportes" },
+            // { permission: "bitacora", route: { name: "Bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
+            // {
+            //     permission: "configuracion", icon: "bi-gear", label: 'Configuración', children: [
+            //         { permission: "correlativos", route: { name: "Correlativos" }, icon: "bi-123", label: "Correlativos" },
+            //         { permission: "plantillas", route: { name: "Plantillas" }, icon: "bi-filetype-html", label: "Plantillas" },
+            //         { permission: "saludos", route: { name: "saludos" }, icon: "bi-person-raised-hand", label: "Saludos" },
+            //         { permission: "dependencias", route: { name: "dependencias" }, icon: "bi-gear", label: "Dependencias" },
+            //         { permission: "entidades", route: { name: "entidades" }, icon: "bi-buildings", label: "Entidades" },
+            //         { permission: "cargos", route: { name: "cargos" }, icon: "bi-gear", label: "Cargos" },
+            //         { permission: "destinatarios", route: { name: "destinatarios" }, icon: "bi-people", label: "Destinatarios" },
+            //     ]
+            // },
             {
-                permission: "configuracion", icon: "bi-gear", label: 'Configuración', children: [
-                    { permission: "correlativos", route: { name: "Correlativos" }, icon: "bi-123", label: "Correlativos" },
-                    { permission: "plantillas", route: { name: "Plantillas" }, icon: "bi-filetype-html", label: "Plantillas" },
-                    { permission: "saludos", route: { name: "saludos" }, icon: "bi-person-raised-hand", label: "Saludos" },
-                    { permission: "dependencias", route: { name: "dependencias" }, icon: "bi-gear", label: "Dependencias" },
-                    { permission: "entidades", route: { name: "entidades" }, icon: "bi-buildings", label: "Entidades" },
-                    { permission: "cargos", route: { name: "cargos" }, icon: "bi-gear", label: "Cargos" },
-                    { permission: "destinatarios", route: { name: "destinatarios" }, icon: "bi-people", label: "Destinatarios" },
-                ]
-            },
-            {
-                permission: "administrador", icon: "bi-files", label: 'Administrador', children: [
+                permission: "administrador", icon: "bi-person-gear", label: 'Administrador', children: [
                     { permission: "permissions", route: { name: "Permissions" }, icon: "bi-lock", label: "Permisos" },
                     { permission: "roles", route: { name: "Roles" }, icon: "bi-lock", label: "Roles" },
                     { permission: "users", route: { name: "Users" }, icon: "bi-people", label: "Usuarios" },

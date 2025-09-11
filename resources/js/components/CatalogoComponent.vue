@@ -81,13 +81,13 @@ export default {
         const apiUrl = props.apiUrl;
         const modal = ref({ title: 'Agregar ' + props.title, isVisible: false});
         const state = reactive({
-            laravelResponse: { per_page: 5, data: []},
+            laravelResponse: { meta: { per_page: 5}, data: [], links: { prev: null, next: null }},
         });
         const { values: correlativoForm, handleSubmit, setFieldValue, setValues, setFieldError, resetForm} = useForm();
         const fields = props.columns.filter(c => c.key !== 'id');
 
         const index = (url) => {
-            const apiUrlIndex = url ? url : `${apiUrl}?per_page=${state.laravelResponse.per_page}`;
+            const apiUrlIndex = url ? url : `${apiUrl}?per_page=${state.laravelResponse.meta.per_page}`;
             axios.get(apiUrlIndex)
             .then(response => {
                 state.laravelResponse = response.data

@@ -75,7 +75,7 @@ export default {
   components: { vSelect },
   props: {
     url: { type: String, required: true },
-    label: { type: String, default: 'name' },
+    label: { type: String, default: 'nombre' },
     placeholder: { type: String, default: null },
     modelValue: { type: [String, Number, Object, Array], default: undefined },
     parentId: { type: [String, Number], default: undefined },

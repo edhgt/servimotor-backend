@@ -17,7 +17,7 @@ export default {
     setup() {
         const columns = [
             {key: 'id', label: 'ID'},
-            {key: 'name', label: 'Nombre',thStyle: 'width:60%;'},
+            {key: 'nombre', label: 'Nombre',thStyle: 'width:60%;'},
             {key: 'guard_name', label: 'Guard name', thStyle: 'width:20%;'},
         ];
         return {
