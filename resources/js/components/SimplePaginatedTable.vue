@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header" v-if="searchable || paginable">
       <div class="card-tools">
-        <select v-model="laravelResponse.per_page" class="form-select" @change="handlePerPageChange">
+        <select v-model="laravelResponse.meta.per_page" class="form-select" @change="handlePerPageChange">
           <option v-for="size in [5, 10, 15, 20, 50, 100, 150, 200, 500, 1000]" :key="size" :value="size">
             {{ size }} por página
           </option>
@@ -98,11 +98,11 @@ export default {
     });
 
     const handlePageChange = (url: string) => {
-      context.emit('change-page', `${url}&per_page=${laravelResponse.value.per_page}`);
+      context.emit('change-page', `${url}&per_page=${laravelResponse.value.meta.per_page}`);
     };
 
     const handlePerPageChange = () => {
-      const url = `${laravelResponse.value.path}?page=${laravelResponse.value.current_page}&per_page=${laravelResponse.value.per_page}`
+      const url = `${laravelResponse.value.meta.path}?page=${laravelResponse.value.meta.current_page}&per_page=${laravelResponse.value.meta.per_page}`
       context.emit('change-page', url);
     };
 
