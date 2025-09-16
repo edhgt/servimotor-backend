@@ -7,3 +7,8 @@ span[role="alert"] {
     color: var(--bs-red);
     margin-bottom: 0px;
 }
+
+.active-bg {
+    color: var(--lte-sidebar-menu-active-color);
+    background-color: var(--lte-sidebar-menu-active-bg);
+}

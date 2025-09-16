@@ -42,7 +42,7 @@
         v-model="modalFormLocalUserCreate.isVisible"
         :scrollable="true"
         >
-        <DynamicForm :schema="modalFormLocalUserCreate.formSchema" :initialValues="modalFormLocalUserCreate.initialValues" :is-reset-form="modalFormLocalUserCreate.isResetForm" :errors="modalFormLocalUserCreate.errors" @submit="store" />
+        <DynamicForm :schema="modalFormLocalUserCreate.formSchema" :initialValues="modalFormLocalUserCreate.initialValues" :is-reset-form="modalFormLocalUserCreate.isResetForm" :errors="modalFormLocalUserCreate.errors" @submit="submit" />
     </Modal>
 
 </template>
@@ -230,7 +230,15 @@ export default {
             modalFormLocalUserCreate.value.isVisible = true;
         };
 
-        const store = (values, index) => {
+        const submit = (values) => {
+            if(values.id) {
+                update(values);
+            } else {
+                store(values);
+            }
+        };
+
+        const store = (values) => {
             const apiUrl = '/api/users';
             axios.post(apiUrl, values)
             .then(response => {
@@ -246,13 +254,12 @@ export default {
         const getRolesByUserId = (id) => {
             axios.get(`${apiUrl}/${id}`, {params: { roles: true}}).then(response => {
                 const roles = response.data.map(r => r.id);
-                modalFormLocalUserCreate.value.initialValues = roles;
+                modalFormLocalUserCreate.value.initialValues.roles = roles;
             });
         }
 
         const edit = (item, index) => {
             getRolesByUserId(item.id);
-            modalFormLocalUserCreate.value.index = index;
             modalFormLocalUserCreate.value.isVisible = true;
             modalFormLocalUserCreate.value.isResetForm = true;
             modalFormLocalUserCreate.value.initialValues = {
@@ -260,6 +267,10 @@ export default {
                 ...item,
                 ...item.empleado
             };
+            modalFormLocalUserCreate.value.formSchema.submitText = 'Actualizar usuario';
+            modalFormLocalUserCreate.value.initialValues.index = index;
+            modalFormLocalUserCreate.value.initialValues.id = item.id;
+
         };
 
         const update = (values) => {
@@ -306,9 +317,8 @@ export default {
             modalFormLocalUserCreate,
             index,
             create,
-            store,
+            submit,
             edit,
-            update,
             destroy,
             restore
         };

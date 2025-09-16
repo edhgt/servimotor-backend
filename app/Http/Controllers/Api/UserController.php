@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Empleado;
 use App\Models\User;
 use App\Notifications\UserCreatedAccount;
 
@@ -27,6 +28,11 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
+    public function setName($request)
+    {
+        return trim(preg_replace('/\\s+/', ' ', "{$request->primer_nombre} {$request->segundo_nombre} {$request->primer_apellido} {$request->segundo_apellido}"));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -38,7 +44,7 @@ class UserController extends Controller
             $password = $request->isRandomPassword
                     ? Str::password(12, true, true, false)
                     : $request->password;
-            $name = trim(preg_replace('/\\s+/', ' ', "{$request->primer_nombre} {$request->segundo_nombre} {$request->primer_apellido} {$request->segundo_apellido}"));
+            $name = $this->setName($request);
             $user = User::create(array_merge(
                 $request->except(['roles', 'password', 'name']),
                 [
@@ -87,9 +93,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserStoreRequest $request, User $user): JsonResponse
+    public function update(Request $request, User $user): JsonResponse
     {
-        $user->update($request->validated());
+        $name = $this->setName($request);
+        $user->update(array_merge(
+            ['name' => $name],
+            $request->except('name')
+        ));
+        Empleado::findOrFail($request->empleado['id'])->update($request->all());
 
         return response()->json(new UserResource($user));
     }

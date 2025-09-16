@@ -76,7 +76,6 @@ export default defineComponent({
       () => props.initialValues,
       (newValues) => {
         setValues(newValues);
-        console.log(newValues)
       },
       { deep: true, immediate: true }
     );
