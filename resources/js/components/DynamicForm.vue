@@ -46,13 +46,13 @@ export default defineComponent({
     }
   },
   setup(props, ctx) {
-    const isResetPassword = toRef(props, 'isResetPassword');
+    const isResetForm = toRef(props, 'isResetForm');
     const { values: form, setValues, setFieldError, resetForm, handleSubmit} = useForm({
       initialValues: props.initialValues,
     });
     const onSubmit = handleSubmit(() => {
       ctx.emit('submit', form);
-      if(isResetPassword.value) {
+      if(isResetForm.value) {
         resetForm();
       }
     }, (errors) => {

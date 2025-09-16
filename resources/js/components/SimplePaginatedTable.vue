@@ -2,14 +2,14 @@
   <div class="card">
     <div class="card-header" v-if="searchable || paginable">
       <div class="card-tools">
-        <select v-model="laravelResponse.meta.per_page" class="form-select" @change="handlePerPageChange">
+        <select id="per_page" name="per_page" v-model="laravelResponse.meta.per_page" class="form-select" @change="handlePerPageChange">
           <option v-for="size in [5, 10, 15, 20, 50, 100, 150, 200, 500, 1000]" :key="size" :value="size">
             {{ size }} por página
           </option>
         </select>
       </div>
       <div class="input-group w-50" v-if="searchable">
-        <input type="search" v-model="searchQuery" placeholder="Buscar..." class="form-control" />
+        <input id="search" name="search" type="search" v-model="searchQuery" placeholder="Buscar..." class="form-control" />
       </div>
     </div>
     <div class="card-body p-0 table-responsive">

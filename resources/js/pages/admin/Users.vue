@@ -89,7 +89,6 @@ export default {
             formSchema: {
                 title: 'Datos generales',
                 submitText: 'Registrar usuario',
-                fields: [],
                 fields: [
                     {
                         label: 'Documento Personal de Identificación',
@@ -188,9 +187,10 @@ export default {
                     },
                     {
                         label: 'Contraseña',
+                        id: 'password',
                         name: 'password',
                         as: 'input',
-                        type: 'password',
+                        type: 'current-password',
                         col: 6,
                     },
                     {
@@ -242,10 +242,10 @@ export default {
             const apiUrl = '/api/users';
             axios.post(apiUrl, values)
             .then(response => {
+                toast.success(`Usuario ${response.data.name} <${response.data.email}> creado correctamente`);
                 state.laravelResponse.data.unshift(response.data);
                 modalFormLocalUserCreate.value.isVisible = false;
                 modalFormLocalUserCreate.value.isResetForm = true;
-                toast.success(`Se sincronizó el usuario ${response.data.name} <${response.data.email}>`);
             }).catch(errors => {
                 modalFormLocalUserCreate.value.errors = errors.response.data.errors;
             });
@@ -277,8 +277,8 @@ export default {
             axios.patch(`${apiUrl}/${values.id}`, values)
             .then(response => {
                 state.laravelResponse.data[modalFormLocalUserCreate.value.index] = response.data;
+                modalFormLocalUserCreate.value.isVisible = false;
                 toast.info(`Usuario ${values.name} <${values.email}> actualizado`);
-                    modalFormLocalUserCreate.value.isVisible = false;
             })
             .catch(error => {
                 modalFormLocalUserCreate.value.errors = errors.response.data.errors;

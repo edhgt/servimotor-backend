@@ -1,6 +1,6 @@
 <template>
-  <div :id="id" ref="modalRef" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" :data-bs-backdrop="backdrop" :data-bs-keyboard="keyboard">
-    <div class="modal-dialog" :class="'modal-' + size">
+  <div :id="id" ref="modalRef" class="modal fade" aria-labelledby="modalLabel">
+    <div class="modal-dialog" :class="['modal-' + size, centered? 'modal-dialog-centered' : null, scrollable ? 'modal-dialog-scrollable' : null]">
       <div class="modal-content">
         <div class="modal-header">
           <slot class="modal-title" name="header" id="modalLabel" v-if="$slots.header"></slot>
@@ -8,10 +8,10 @@
           <button type="button" class="btn-close" @click="closeModal" aria-label="Close" v-if="autoClose"></button>
           <slot name="autoClose" v-else></slot>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modalBody">
           <slot></slot>
         </div>
-        <div class="modal-footer" v-if="$slots.footer">
+        <div class="modal-footer d-block" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -31,8 +31,10 @@ export default {
     size: { type: String, default: 'md', validator: value => ['sm', 'md', 'lg', 'xl', 'fullscreen'].includes(value) },
     modelValue: { type: Boolean, default: false },
     autoClose: { type: Boolean, default: true },
+    scrollable: { type: Boolean, default: false },
     backdrop: { type: [Boolean, String], default: true, validator: (value) => typeof value === 'boolean' || value === 'static',},
-    keyboard: { type: [Boolean], default: false}
+    keyboard: { type: [Boolean], default: true},
+    centered: { type: [Boolean], default: false},
   },
   setup(props, { emit }) {
     const modalRef = ref(null);
@@ -50,7 +52,11 @@ export default {
     });
 
     onMounted(() => {
-      modalInstance = new Modal(modalRef.value);
+      modalInstance = new Modal(modalRef.value, {
+        backdrop: props.backdrop ? props.backdrop : 'static',
+        focus: true,
+        keyboard: props.keyboard,
+      });
 
       if (props.modelValue) {
         modalInstance.show();
@@ -74,14 +80,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.modal-backdrop {
-  z-index: 1040 !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.modal {
-  z-index: 1050 !important;
-}
-</style>

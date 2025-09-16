@@ -1,14 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import commonsRoutes from './modules/commons.routes';
-import destinatarioRoutes from './modules/destinatario.routes';
-import documentsRoutes from './modules/documents.routes';
 import adminRoutes from './modules/admin.routes';
 
 const routes = [
 	...commonsRoutes,
-  ...destinatarioRoutes,
-  ...documentsRoutes,
   ...adminRoutes,
 	{
 		path: '/:pathMatch(.*)*',
@@ -34,23 +30,6 @@ router.beforeEach((to, from, next) => {
   setDocumentTitle(to.meta.title);
   next();
 });
-
-// router.beforeEach((to, from, next) => {
-	
-// 	if (to.name != 'home' && !store.state.user.permissions.some(function(permission) { return permission.name == to.meta.permission })) {
-// 		Toast.fire({
-// 			icon: 'warning',
-// 			title: 'Acceso no autorizado',
-// 			text: `No tiene permisos para acceder: ${to.meta.title}`
-// 		});
-// 		//next({ name: 'reservar.index'});
-// 		return;
-// 	} else {
-// 		document.title = to.meta.title || 'Documentos';
-// 		next();
-// 	}
-	
-// });
 
 /**
  * Carga rutas dinámicas en función de los roles del usuario

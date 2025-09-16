@@ -14,7 +14,7 @@ export default [
     {
         path: '/roles',
         name: 'Roles',
-        component: () => import('@/pages/Roles.vue'),
+        component: () => import('@/pages/admin/Roles.vue'),
         meta: { title: 'Roles', permission: 'Roles' }
     },
 ];

@@ -41,31 +41,23 @@
         size="lg"
         v-model="modal.isVisible"
     >
-        <form autocomplete="off" v-on:submit.prevent="submit">
-            <div class="mb-3" v-for="field in fields" :key="field.key">
-                <label class="form-label" :for="field.key">{{field.label}}</label>
-                <Field class="form-control" :id="field.key" :name="field.key" type="text" :label="field.label.toLowerCase()" rules="required"/>
-                <ErrorMessage :name="field.key"></ErrorMessage>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </form>
+        <!-- <DynamicForm :schema="form.formSchema" :initialValues="form.initialValues" :is-reset-form="true" :errors="form.errors" @submit="submit" /> -->
     </Modal>
 </template>
 
 <script>
 import { onMounted, reactive, ref } from 'vue';
 import { useToast } from 'vue-toastification';
-import { Field, ErrorMessage, useForm } from 'vee-validate';
 import SimplePaginatedTable from '@/components/SimplePaginatedTable.vue';
 import Modal from '@/components/Modal.vue';
+import DynamicForm from '@/components/DynamicForm.vue';
 
 export default {
     name: 'CatalogoComponent',
     components: {
-        Field, ErrorMessage,
         SimplePaginatedTable,
         Modal,
+        DynamicForm,
     },
     props: {
         apiUrl: { type: String, required: true},
@@ -83,8 +75,19 @@ export default {
         const state = reactive({
             laravelResponse: { meta: { per_page: 5}, data: [], links: { prev: null, next: null }},
         });
-        const { values: correlativoForm, handleSubmit, setFieldValue, setValues, setFieldError, resetForm} = useForm();
-        const fields = props.columns.filter(c => c.key !== 'id');
+        const form = ref({
+            title: 'Nuevo ' + props.title,
+            isVisible: false,
+            isResetForm: false,
+            initialValues: {},
+            formSchema: {
+                title: null,
+                submitText: 'Registrar ' + props.title,
+                fields: props.columns.filter(c => c.key != 'id').map(c => {
+                    return { name: c.key, ...c}
+                })
+            }
+        });
 
         const index = (url) => {
             const apiUrlIndex = url ? url : `${apiUrl}?per_page=${state.laravelResponse.meta.per_page}`;
@@ -108,9 +111,9 @@ export default {
             modal.value.isVisible = true;
         };
 
-        const submit = handleSubmit(() => {
+        const submit = () => {
             correlativoForm.id === undefined ? store() : update();
-        });
+        };
 
         const setErrors = (errors) => {
             if (errors) {
@@ -171,12 +174,19 @@ export default {
 
         onMounted(() => {
             index();
+            form.value.formSchema = {
+                title: null,
+                submitText: 'Registrar ' + props.title,
+                fields: props.columns.filter(c => c.key != 'id').map(c => {
+                    return { name: c.key, ...c}
+                })
+            }
         });
         return {
             modal,
             state,
+            form,
             index,
-            fields,
             create,
             edit,
             submit,

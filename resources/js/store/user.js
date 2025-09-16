@@ -66,10 +66,12 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem(THEME_KEY, theme.value)
   };
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = () => {
     try {
-      const { data } = await axios.get('/api/user');
-      setUser(data);
+      return axios.get('/api/user').then(response => {
+        setUser(response.data);
+
+      });
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }
