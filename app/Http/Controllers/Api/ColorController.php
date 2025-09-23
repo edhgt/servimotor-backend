@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Color;
+use Illuminate\Http\Request;
+use App\Http\Requests\ColorRequest;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ColorResource;
+
+class ColorController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $colors = Color::paginate();
+
+        return ColorResource::collection($colors);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(ColorRequest $request): JsonResponse
+    {
+        $color = Color::create($request->validated());
+
+        return response()->json(new ColorResource($color));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Color $color): JsonResponse
+    {
+        return response()->json(new ColorResource($color));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(ColorRequest $request, Color $color): JsonResponse
+    {
+        $color->update($request->validated());
+
+        return response()->json(new ColorResource($color));
+    }
+
+    /**
+     * Delete the specified resource.
+     */
+    public function destroy(Color $color): Response
+    {
+        $color->delete();
+
+        return response()->noContent();
+    }
+}

@@ -47,6 +47,14 @@ export default {
             { permission: "home", route: { name: "home" }, icon: "bi-house", label: "Inicio" },
             { permission: "bitacora", route: { name: "Bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
             {
+                permission: "catalogos", icon: "bi-gear", label: 'Catalogos', children: [
+                    { permission: "categorias", route: { name: "Categorias" }, icon: "bi-lock", label: "Categorias" },
+                    { permission: "colores", route: { name: "Colores" }, icon: "bi-palette", label: "Colores" },
+                    { permission: "marcas", route: { name: "Marcas" }, icon: "bi-r-circle", label: "Marcas" },
+                    { permission: "modelos", route: { name: "Modelos" }, icon: "bi-car-front", label: "Modelos" },
+                ]
+            },
+            {
                 permission: "administrador", icon: "bi-person-gear", label: 'Administrador', children: [
                     { permission: "permissions", route: { name: "Permissions" }, icon: "bi-lock", label: "Permisos" },
                     { permission: "roles", route: { name: "Roles" }, icon: "bi-lock", label: "Roles" },

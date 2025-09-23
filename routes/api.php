@@ -23,6 +23,11 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::apiResource('roles', Api\RoleController::class);
 	Route::apiResource('puestos', Api\PuestoController::class);
 
+	Route::apiResource('categorias', Api\CategoriaController::class);
+	Route::apiResource('colores', Api\ColorController::class);
+	Route::apiResource('marcas', Api\MarcaController::class);
+	Route::apiResource('modelos', Api\ModeloController::class);
+
 	Route::get('bitacora', App\Http\Controllers\Api\BitacoraController::class);
 	Route::get('exportar-bitacora', [App\Http\Controllers\Api\BitacoraController::class, 'export'])->name('exportar.bitacora');
 });

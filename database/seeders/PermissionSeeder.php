@@ -83,5 +83,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'users.show', 'guard_name' => 'web']);
         Permission::create(['name' => 'users.edit', 'guard_name' => 'web']);
         Permission::create(['name' => 'users.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'catalogos', 'guard_name' => 'web']);
+        Permission::create(['name' => 'categorias', 'guard_name' => 'web']);
+        Permission::create(['name' => 'categorias.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'categorias.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'categorias.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'categorias.destroy', 'guard_name' => 'web']);
     }
 }

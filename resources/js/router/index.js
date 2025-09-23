@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import commonsRoutes from './modules/commons.routes';
 import adminRoutes from './modules/admin.routes';
+import catalogosRoutes from './modules/catalogos.routes';
 
 const routes = [
 	...commonsRoutes,
   ...adminRoutes,
+  ...catalogosRoutes,
 	{
 		path: '/:pathMatch(.*)*',
 		component: () => import('@/pages/NotFound.vue'),
