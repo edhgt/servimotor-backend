@@ -17,7 +17,7 @@ class ColorController extends Controller
      */
     public function index(Request $request)
     {
-        $colors = Color::paginate();
+        $colors = Color::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return ColorResource::collection($colors);
     }

@@ -81,7 +81,7 @@ export default {
     const tipoFiltro = ref();
     const valorFiltro = ref();
     const opcionesFiltro = ref({});
-    const laravelResponse = ref({ meta: { per_page: 5}, data: [], links: { prev: null, next: null }});
+    const laravelResponse = ref({ meta: { per_page: 5, path: '/api/bitacora'}, data: [], links: { prev: null, next: null }});
     const sinResultados = ref(false);
     const columns = [
       { key: 'id', label: 'ID' },
@@ -98,6 +98,7 @@ export default {
     };
 
     const busqueda = function (url) {
+      console.log(url)
       const apiUrl = url ? url : '/api/bitacora';
       const urlParams = new URLSearchParams();
       urlParams.append("columna", tipoFiltro.value.code);

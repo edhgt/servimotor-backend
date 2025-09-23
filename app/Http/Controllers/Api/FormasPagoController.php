@@ -17,7 +17,7 @@ class FormasPagoController extends Controller
      */
     public function index(Request $request)
     {
-        $formasPagos = FormaPago::paginate();
+        $formasPagos = FormaPago::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return FormasPagoResource::collection($formasPagos);
     }

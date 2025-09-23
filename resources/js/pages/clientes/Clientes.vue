@@ -4,7 +4,7 @@
             <div class="btn-group float-end">
                 <button class="btn btn-outline-primary" @click="create" v-can="'users.create'">
                     <i class="bi bi-person-plus"></i>
-                    Nuevo usuario
+                    Nuevo cliente
                 </button>
             </div>
         </div>
@@ -17,18 +17,14 @@
                 :tiene-busqueda-avanzada="true"
                 @change-page="index"
             >
-                <template #deleted_at="{ value }">
-                    <span class="badge text-bg-success" v-if="value == null">Activo</span>
-                    <span class="badge text-bg-danger" v-else>Inactivo</span>
-                </template>
                 <template #actions="{ item, index }">
-                    <button type="button" class="btn btn-primary btn-sm" title="Modificar usuario" @click="edit(item, index)" v-can="'users.edit'">
+                    <button type="button" class="btn btn-primary btn-sm" title="Modificar cliente" @click="edit(item, index)" v-can="'users.edit'">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-danger btn-sm" title="Deshabilitar usuario" @click="destroy(item, index)" v-if="item.deleted_at == null" v-can="'users.delete'">
+                    <button type="button" class="btn btn-danger btn-sm" title="Deshabilitar cliente" @click="destroy(item, index)" v-if="item.deleted_at == null" v-can="'users.delete'">
                         <i class="bi bi-trash"></i>
                     </button>
-                    <button type="button" class="btn btn-success btn-sm" title="Habilitar usuario" @click="restore(item.id, index)" v-else>
+                    <button type="button" class="btn btn-success btn-sm" title="Habilitar cliente" @click="restore(item.id, index)" v-else>
                         <i class="bi bi-check-square"></i>
                     </button>
                 </template>
@@ -39,7 +35,7 @@
     <Modal
         id="modalFormLocalUserCreate"
         :title="modalFormLocalUserCreate.title"
-        size="xl"
+        size="lg"
         v-model="modalFormLocalUserCreate.isVisible"
         >
         <DynamicForm :schema="modalFormLocalUserCreate.formSchema" :initialValues="modalFormLocalUserCreate.initialValues" :is-reset-form="modalFormLocalUserCreate.isResetForm" :errors="modalFormLocalUserCreate.errors" @submit="submit" />
@@ -63,23 +59,23 @@ export default {
     },
     setup() {
         const toast = useToast();
-        const apiUrl = '/api/users';
+        const apiUrl = '/api/clientes';
         const state = reactive({
             laravelResponse: { meta: { per_page: 5}, data: [], links: { prev: null, next: null }},
             rolesSelected: [],
         });
         const columns = [
             {key: 'id', label: 'Id'},
-            {key: 'name', label: 'Nombre'},
-            {key: 'username', label: 'Usuario'},
-            {key: 'email', label: 'Correo electrónico'},
+            {key: 'nit', label: 'Nit'},
+            {key: 'nombre_completo', label: 'Nombre completo'},
+            {key: 'direccion', label: 'Dirección'},
+            {key: 'telefono', label: 'Teléfono'},
             {key: 'created_at', label: 'Fecha creación'},
             {key: 'updated_at', label: 'Fecha actualiación'},
-            {key: 'deleted_at', label: 'Estado'},
         ];
 
         const modalFormLocalUserCreate = ref({
-            title: 'Nuevo usuario',
+            title: 'Nuevo cliente',
             isVisible: false,
             isResetForm: false,
             initialValues: {
@@ -88,20 +84,21 @@ export default {
             },
             formSchema: {
                 title: 'Datos generales',
-                submitText: 'Registrar usuario',
+                submitText: 'Registrar cliente',
                 fields: [
-                    {
-                        label: 'Documento Personal de Identificación',
-                        name: 'cui',
-                        as: 'input',
-                        rules: 'required|max:255',
-                        col: 6,
-                    },
                     {
                         label: 'Nit',
                         name: 'nit',
                         as: 'input',
                         rules: 'max:255',
+                        col: 6,
+                    },
+                    {
+                        label: 'Teléfono',
+                        name: 'telefono',
+                        type: 'tel',
+                        as: 'input',
+                        rules: 'required|max:255',
                         col: 6,
                     },
                     {
@@ -133,89 +130,11 @@ export default {
                         col: 6,
                     },
                     {
-                        label: 'Fecha de nacimiento',
-                        name: 'fecha_nacimiento',
-                        type: 'date',
-                        as: 'input',
-                        rules: 'required|max:255',
-                        col: 6,
-                    },
-                    {
                         label: 'Dirección',
                         name: 'direccion',
                         as: 'input',
                         rules: 'required|max:255',
-                        col: 6,
-                    },
-                    {
-                        label: 'Teléfono',
-                        name: 'telefono',
-                        type: 'tel',
-                        as: 'input',
-                        rules: 'required|max:255',
-                        col: 6,
-                    },
-                    {
-                        label: 'Fecha de contratación',
-                        name: 'fecha_contratacion',
-                        type: 'date',
-                        as: 'input',
-                        rules: 'required|max:255',
-                        col: 6,
-                    },
-                    {
-                        label: 'Puesto',
-                        name: 'puesto_id',
-                        as: 'select',
-                        rules: 'required',
-                        col: 6,
-                        optionsUrl: '/api/puestos'
-                    },
-                    {
-                        label: 'Correo electrónico',
-                        name: 'email',
-                        as: 'input',
-                        rules: 'required|email|max:255',
-                        col: 6,
-                    },
-                    {
-                        label: 'Usuario',
-                        name: 'username',
-                        as: 'input',
-                        rules: 'required|max:255',
-                        col: 6,
-                    },
-                    {
-                        label: 'Contraseña',
-                        id: 'password',
-                        name: 'password',
-                        as: 'input',
-                        type: 'current-password',
-                        col: 6,
-                    },
-                    {
-                        label: 'Rol',
-                        name: 'roles',
-                        labelField: 'name',
-                        as: 'select',
-                        rules: 'required',
-                        col: 6,
-                        multiple: true,
-                        optionsUrl: '/api/roles'
-                    },
-                    {
-                        label: 'Generar contraseña aleatoria',
-                        name: 'isRandomPassword',
-                        as: 'checkbox',
-                        type: 'checkbox',
-                        col: 3,
-                    },
-                    {
-                        label: 'Enviar contraseña por correo electrónico',
-                        name: 'isSendPassword',
-                        as: 'checkbox',
-                        type: 'checkbox',
-                        col: 3,
+                        col: 12,
                     },
                 ]
             },
@@ -240,7 +159,6 @@ export default {
         };
 
         const store = (values) => {
-            const apiUrl = '/api/users';
             axios.post(apiUrl, values)
             .then(response => {
                 toast.success(`Usuario ${response.data.name} <${response.data.email}> creado correctamente`);
@@ -268,8 +186,8 @@ export default {
                 ...item,
                 ...item.empleado
             };
-            modalFormLocalUserCreate.value.title = 'Modificar usuario: ' + item.name;
-            modalFormLocalUserCreate.value.formSchema.submitText = 'Actualizar usuario';
+            modalFormLocalUserCreate.value.title = 'Modificar cliente: ' + item.nombre_completo;
+            modalFormLocalUserCreate.value.formSchema.submitText = 'Actualizar cliente';
             modalFormLocalUserCreate.value.initialValues.index = index;
             modalFormLocalUserCreate.value.initialValues.id = item.id;
 

@@ -17,7 +17,7 @@ class TiposDocumentoController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposDocumentos = TipoDocumento::paginate();
+        $tiposDocumentos = TipoDocumento::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposDocumentoResource::collection($tiposDocumentos);
     }

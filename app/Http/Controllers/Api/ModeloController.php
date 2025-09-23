@@ -17,7 +17,7 @@ class ModeloController extends Controller
      */
     public function index(Request $request)
     {
-        $modelos = Modelo::paginate();
+        $modelos = Modelo::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return ModeloResource::collection($modelos);
     }

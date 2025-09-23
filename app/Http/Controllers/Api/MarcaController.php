@@ -17,7 +17,7 @@ class MarcaController extends Controller
      */
     public function index(Request $request)
     {
-        $marcas = Marca::paginate();
+        $marcas = Marca::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return MarcaResource::collection($marcas);
     }

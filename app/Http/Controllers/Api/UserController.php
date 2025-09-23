@@ -23,7 +23,13 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with('empleado')->orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $query = User::with('empleado')->orderBy('id', 'DESC');
+        
+        if($request->has('q')) {
+            $query->where($request->column, 'LIKE', "%{$request->q}%");
+        }
+        
+        $users = $query->simplePaginate($request->per_page);
 
         return UserResource::collection($users);
     }

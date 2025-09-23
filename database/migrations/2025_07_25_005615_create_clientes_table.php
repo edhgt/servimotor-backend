@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('segundo_apellido')->nullable();
             $table->string('direccion')->nullable();
             $table->string('telefono', 45);
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

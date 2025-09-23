@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
-use App\Http\Requests\ClienteRequest;
+use App\Http\Requests\ClienteStoreRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,13 @@ class ClienteController extends Controller
      */
     public function index(Request $request)
     {
-        $clientes = Cliente::paginate();
+        $query = Cliente::orderBy('id', 'DESC');
+
+        if($request->has('q')) {
+            $query->where($request->column, 'LIKE', "%{$request->q}%");
+        }
+
+        $clientes = $query->simplePaginate($request->per_page);
 
         return ClienteResource::collection($clientes);
     }
@@ -25,7 +31,7 @@ class ClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ClienteRequest $request): JsonResponse
+    public function store(ClienteStoreRequest $request): JsonResponse
     {
         $cliente = Cliente::create($request->validated());
 
@@ -43,7 +49,7 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ClienteRequest $request, Cliente $cliente): JsonResponse
+    public function update(ClienteStoreRequest $request, Cliente $cliente): JsonResponse
     {
         $cliente->update($request->validated());
 

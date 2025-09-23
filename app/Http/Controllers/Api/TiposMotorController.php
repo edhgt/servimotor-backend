@@ -17,7 +17,7 @@ class TiposMotorController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposMotors = TipoMotor::paginate();
+        $tiposMotors = TipoMotor::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposMotorResource::collection($tiposMotors);
     }

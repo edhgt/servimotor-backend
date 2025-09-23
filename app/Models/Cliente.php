@@ -24,6 +24,11 @@ class Cliente extends Model
         'user_id',
     ];
 
+    public function getNombreCompletoAttribute()
+    {
+        return preg_replace('/\s+/', ' ', trim("{$this->primer_nombre} {$this->segundo_nombre} {$this->primer_apellido} {$this->segundo_apellido}"));
+    }
+
     public function sucursal(): BelongsTo
     {
         return $this->belongsTo(Sucursal::class);

@@ -17,7 +17,7 @@ class TiposVehiculoController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposVehiculos = TipoVehiculo::paginate();
+        $tiposVehiculos = TipoVehiculo::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposVehiculoResource::collection($tiposVehiculos);
     }

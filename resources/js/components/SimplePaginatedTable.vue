@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header" v-if="searchable || paginable">
+      <Search :columnas="columnsToFilter" @set-data="handleFilter" v-if="tieneBusquedaAvanzada"/>
       <div class="card-tools">
         <select id="per_page" name="per_page" v-model="laravelResponse.meta.per_page" class="form-select"
           @change="handlePerPageChange">
@@ -57,13 +58,23 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, toRef, ThHTMLAttributes } from "vue";
+import { ref, computed, toRef, ThHTMLAttributes, onMounted, Ref } from "vue";
 import { formatDate } from "../utils/dateUtils";
+import Search from "@/components/Search.vue";
 import Pagination from "@/components/Pagination.vue";
+
+interface Column {
+  key: string;
+  label: string;
+  thClass: string;
+  thStyle: ThHTMLAttributes;
+}
+
 
 export default {
   name: "SimplePaginatedTable",
   components: {
+    Search,
     Pagination
   },
   props: {
@@ -75,6 +86,7 @@ export default {
     columns: { type: Array as () => { key: string; label: string, thClass: string, thStyle: ThHTMLAttributes }[], required: true },
     searchable: { type: Boolean, default: true },
     paginable: { type: Boolean, default: true },
+    tieneBusquedaAvanzada: { type: Boolean, default: false },
     containOptions: { type: Boolean, default: true },
   },
   emits: ['change-page'],
@@ -82,6 +94,8 @@ export default {
     const laravelResponse = toRef(props, 'laravelResponse');
     const searchQuery = ref("");
     const containOptions = toRef(props, 'containOptions');
+    const columnsToFilter: Ref<Column[]>= ref([]);
+    const urlApi = ref('');
 
     const itemsFiltered = computed(() => {
       if (!searchQuery.value) {
@@ -89,7 +103,7 @@ export default {
       }
 
       const query = searchQuery.value.toLowerCase();
-      return laravelResponse.value.data.filter((item) =>
+      return laravelResponse.value.data.filter((item: any) =>
         props.columns.some((column) => {
           const value = item[column.key];
           if (value == null) return false;
@@ -101,17 +115,28 @@ export default {
       context.emit('change-page', `${url}&per_page=${laravelResponse.value.meta.per_page}`);
     };
 
-    const handlePerPageChange = () => {
-      const url = `${laravelResponse.value.meta.path}?page=${laravelResponse.value.meta.current_page}&per_page=${laravelResponse.value.meta.per_page}`
-      context.emit('change-page', url);
+    const handleFilter = (url: string) => {
+      console.log(url, urlApi.value)
+      context.emit('change-page', `${urlApi.value}&${url}&per_page=${laravelResponse.value.meta.per_page}`);
     };
+
+    const handlePerPageChange = () => {
+      context.emit('change-page', `${urlApi.value}&per_page=${laravelResponse.value.meta.per_page}`);
+    };
+
+    onMounted(() => {
+      urlApi.value = `${props.laravelResponse.meta.path}?page=${props.laravelResponse.meta.current_page}`
+      columnsToFilter.value = props.columns.filter(c => (c.key != 'id' && !c.key.includes('_at')));
+    });
 
     return {
       laravelResponse,
       itemsFiltered,
       searchQuery,
       containOptions,
+      columnsToFilter,
       handlePageChange,
+      handleFilter,
       handlePerPageChange,
       formatDate
     };

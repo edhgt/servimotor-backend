@@ -17,7 +17,7 @@ class CategoriaController extends Controller
      */
     public function index(Request $request)
     {
-        $categorias = Categoria::paginate();
+        $categorias = Categoria::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return CategoriaResource::collection($categorias);
     }

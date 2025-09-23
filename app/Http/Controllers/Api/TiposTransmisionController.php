@@ -17,7 +17,7 @@ class TiposTransmisionController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposTransmisions = TipoTransmision::paginate();
+        $tiposTransmisions = TipoTransmision::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposTransmisionResource::collection($tiposTransmisions);
     }

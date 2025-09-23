@@ -17,7 +17,7 @@ class VehiculoController extends Controller
      */
     public function index(Request $request)
     {
-        $vehiculos = Vehiculo::paginate();
+        $vehiculos = Vehiculo::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return VehiculoResource::collection($vehiculos);
     }

@@ -17,7 +17,7 @@ class UnidadesMedidaController extends Controller
      */
     public function index(Request $request)
     {
-        $unidadesMedidas = UnidadMedida::paginate();
+        $unidadesMedidas = UnidadMedida::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return UnidadesMedidaResource::collection($unidadesMedidas);
     }

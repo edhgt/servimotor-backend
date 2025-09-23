@@ -17,7 +17,7 @@ class PuestoController extends Controller
      */
     public function index(Request $request)
     {
-        $puestos = Puesto::simplePaginate();
+        $puestos = Puesto::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return PuestoResource::collection($puestos);
     }

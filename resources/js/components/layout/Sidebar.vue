@@ -35,7 +35,6 @@
 <script>
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '@/store/user';
-import { loadRoleRoutes } from '@/router';
 
 export default {
     name: 'Sidebar',
@@ -46,6 +45,7 @@ export default {
         const fullMenu = [
             { permission: "home", route: { name: "home" }, icon: "bi-house", label: "Inicio" },
             { permission: "bitacora", route: { name: "bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
+            { permission: "clientes", route: { name: "clientes" }, icon: "bi-people", label: "Clientes" },
             {
                 permission: "catalogos", icon: "bi-collection", label: 'Catalogos', children: [
                     { permission: "categorias", route: { name: "categorias" }, icon: "bi-folder", label: "Categorias" },

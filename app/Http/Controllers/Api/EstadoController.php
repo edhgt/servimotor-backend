@@ -17,7 +17,7 @@ class EstadoController extends Controller
      */
     public function index(Request $request)
     {
-        $estados = Estado::paginate();
+        $estados = Estado::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return EstadoResource::collection($estados);
     }
