@@ -17,7 +17,7 @@ export default {
     setup() {
         const columns = [
             {key: 'id', label: 'ID', name: 'id'},
-            {key: 'nombre', label: 'Nombre', name: 'nombre', rules: 'required', as: 'input', thStyle: 'width:60%;'},
+            {key: 'nombre', label: 'Nombre', name: 'nombre', rules: 'required', as: 'input', type: 'color', thStyle: 'width:60%;'},
         ];
         return {
             columns,
