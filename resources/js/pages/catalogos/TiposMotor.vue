@@ -1,16 +1,16 @@
 <template>
     <CatalogoComponent
-        api-url="/api/modelos"
-        title="modelo"
+        api-url="/api/tipos-motor"
+        title="tipo de motor"
         :columns="columns"
-        permission="modelos"
+        permission="tipos-motor"
     />
 </template>
 
 <script>
 import CatalogoComponent from '@/components/CatalogoComponent.vue';
 export default {
-    name: 'Modelos',
+    name: 'Tipos de motor',
     components: {
         CatalogoComponent
     },

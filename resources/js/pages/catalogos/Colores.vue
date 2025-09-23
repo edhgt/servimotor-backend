@@ -1,7 +1,7 @@
 <template>
     <CatalogoComponent
         api-url="/api/colores"
-        title="permiso"
+        title="color"
         :columns="columns"
         permission="colores"
     />
@@ -16,7 +16,7 @@ export default {
     },
     setup() {
         const columns = [
-            {key: 'id', label: 'ID', name: 'id'},
+            {key: 'id', label: 'Id'},
             {key: 'nombre', label: 'Nombre', name: 'nombre', rules: 'required', as: 'input', type: 'color', thStyle: 'width:60%;'},
         ];
         return {

@@ -45,20 +45,28 @@ export default {
 
         const fullMenu = [
             { permission: "home", route: { name: "home" }, icon: "bi-house", label: "Inicio" },
-            { permission: "bitacora", route: { name: "Bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
+            { permission: "bitacora", route: { name: "bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
             {
-                permission: "catalogos", icon: "bi-gear", label: 'Catalogos', children: [
-                    { permission: "categorias", route: { name: "Categorias" }, icon: "bi-lock", label: "Categorias" },
-                    { permission: "colores", route: { name: "Colores" }, icon: "bi-palette", label: "Colores" },
-                    { permission: "marcas", route: { name: "Marcas" }, icon: "bi-r-circle", label: "Marcas" },
-                    { permission: "modelos", route: { name: "Modelos" }, icon: "bi-car-front", label: "Modelos" },
+                permission: "catalogos", icon: "bi-collection", label: 'Catalogos', children: [
+                    { permission: "categorias", route: { name: "categorias" }, icon: "bi-folder", label: "Categorias" },
+                    { permission: "colores", route: { name: "colores" }, icon: "bi-palette", label: "Colores" },
+                    { permission: "marcas", route: { name: "marcas" }, icon: "bi-r-circle", label: "Marcas" },
+                    { permission: "modelos", route: { name: "modelos" }, icon: "bi-car-front", label: "Modelos" },
+                    { permission: "estados", route: { name: "estados" }, icon: "bi-arrow-repeat", label: "Estados" },
+                    { permission: "puestos", route: { name: "puestos" }, icon: "bi-person-badge", label: "Puestos" },
+                    { permission: "tipos-vehiculos", route: { name: "tipos-vehiculo" }, icon: "bi-car-front", label: "Tipos de vehículo" },
+                    { permission: "tipos-motor", route: { name: "tipos-motor" }, icon: "bi-gear", label: "Tipos de motor" },
+                    { permission: "tipos-transmision", route: { name: "tipos-transmision" }, icon: "bi-gear-wide-connected", label: "Tipos de transmisión" },
+                    { permission: "unidades-medida", route: { name: "unidades-medida" }, icon: "bi-rulers", label: "Unidades de medida" },
+                    { permission: "formas-pago", route: { name: "formas-pago" }, icon: "bi-credit-card", label: "Formas de pago" },
+                    { permission: "tipos-documento", route: { name: "tipos-documento" }, icon: "bi-file-earmark-text", label: "Tipos de documento" },
                 ]
             },
             {
                 permission: "administrador", icon: "bi-person-gear", label: 'Administrador', children: [
-                    { permission: "permissions", route: { name: "Permissions" }, icon: "bi-lock", label: "Permisos" },
-                    { permission: "roles", route: { name: "Roles" }, icon: "bi-lock", label: "Roles" },
-                    { permission: "users", route: { name: "Users" }, icon: "bi-people", label: "Usuarios" },
+                    { permission: "permissions", route: { name: "permissions" }, icon: "bi-lock", label: "Permisos" },
+                    { permission: "roles", route: { name: "roles" }, icon: "bi-lock", label: "Roles" },
+                    { permission: "users", route: { name: "users" }, icon: "bi-people", label: "Usuarios" },
                 ]
             },
         ];

@@ -1,7 +1,7 @@
 <template>
     <CatalogoComponent
         api-url="/api/marcas"
-        title="permiso"
+        title="marca"
         :columns="columns"
         permission="marcas"
     />
@@ -16,7 +16,7 @@ export default {
     },
     setup() {
         const columns = [
-            {key: 'id', label: 'ID', name: 'id'},
+            {key: 'id', label: 'Id'},
             {key: 'nombre', label: 'Nombre', name: 'nombre', rules: 'required', as: 'input', thStyle: 'width:60%;'},
         ];
         return {

@@ -1,22 +1,22 @@
 <template>
     <CatalogoComponent
-        api-url="/api/modelos"
-        title="modelo"
+        api-url="/api/formas-pago"
+        title="forma de pago"
         :columns="columns"
-        permission="modelos"
+        permission="formas-pago"
     />
 </template>
 
 <script>
 import CatalogoComponent from '@/components/CatalogoComponent.vue';
 export default {
-    name: 'Modelos',
+    name: 'Formas de pago',
     components: {
         CatalogoComponent
     },
     setup() {
         const columns = [
-            {key: 'id', label: 'Id'},
+            {key: 'id', label: 'ID', name: 'id'},
             {key: 'nombre', label: 'Nombre', name: 'nombre', rules: 'required', as: 'input', thStyle: 'width:60%;'},
         ];
         return {

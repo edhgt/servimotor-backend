@@ -1,16 +1,16 @@
 <template>
     <CatalogoComponent
-        api-url="/api/modelos"
-        title="modelo"
+        api-url="/api/tipos-documento"
+        title="tipo de documento"
         :columns="columns"
-        permission="modelos"
+        permission="tipos-documento"
     />
 </template>
 
 <script>
 import CatalogoComponent from '@/components/CatalogoComponent.vue';
 export default {
-    name: 'Modelos',
+    name: 'Tipos de documento',
     components: {
         CatalogoComponent
     },

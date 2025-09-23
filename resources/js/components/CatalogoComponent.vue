@@ -64,8 +64,8 @@ export default {
         title: { type: String, required: true},
         permission: { type: String, required: true},
         columns: { type: Array, default: [
-            {key: 'id', label: 'ID'},
-            {key: 'name', label: 'Nombre', thStyle: 'width:80%'},
+            {key: 'id', label: 'Id'},
+            {key: 'name', label: 'Nombre'},
         ]},
     },
     setup(props) {
@@ -99,11 +99,13 @@ export default {
         const create = () => {
             modalForm.value.title = "Crear " + props.title;
             modalForm.value.isVisible = true;
+            form.value.formSchema.submitText = 'Registrar ' + props.title;
         };
 
         const edit = (item, index) => {
-            modalForm.value.title = `Modificar ${props.title}: ${item.name}`;
+            modalForm.value.title = `Modificar ${props.title}: ${item.name || item.nombre}`;
             modalForm.value.isVisible = true;
+            form.value.formSchema.submitText = 'Actualizar ' + props.title;
             form.value.initialValues = state.laravelResponse.data[index];
             form.value.initialValues.index = index;
         };

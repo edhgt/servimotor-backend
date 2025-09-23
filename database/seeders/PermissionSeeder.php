@@ -15,74 +15,6 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         Permission::create(['name' => 'home', 'guard_name' => 'web']);
-        Permission::create(['name' => 'reservar', 'guard_name' => 'web']);
-        Permission::create(['name' => 'busqueda', 'guard_name' => 'web']);
-        Permission::create(['name' => 'mis-documentos', 'guard_name' => 'web']);
-        Permission::create(['name' => 'pendientes', 'guard_name' => 'web']);
-        Permission::create(['name' => 'configuracion', 'guard_name' => 'web']);
-        Permission::create(['name' => 'correlativos', 'guard_name' => 'web']);
-        Permission::create(['name' => 'correlativos.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'correlativos.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'correlativos.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'correlativos.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'plantillas', 'guard_name' => 'web']);
-        Permission::create(['name' => 'plantillas.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'plantillas.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'plantillas.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'plantillas.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'saludos', 'guard_name' => 'web']);
-        Permission::create(['name' => 'saludos.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'saludos.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'saludos.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'saludos.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'dependencias', 'guard_name' => 'web']);
-        Permission::create(['name' => 'dependencias.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'dependencias.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'dependencias.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'dependencias.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'entidades', 'guard_name' => 'web']);
-        Permission::create(['name' => 'entidades.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'entidades.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'entidades.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'entidades.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'cargos', 'guard_name' => 'web']);
-        Permission::create(['name' => 'cargos.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'cargos.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'cargos.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'cargos.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'destinatarios', 'guard_name' => 'web']);
-        Permission::create(['name' => 'destinatarios.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'destinatarios.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'destinatarios.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'destinatarios.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'administrador', 'guard_name' => 'web']);
-        Permission::create(['name' => 'bitacora', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.generate-pdf', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.download', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.upload', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.archive', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'documentos.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'reportes', 'guard_name' => 'web']);
-        Permission::create(['name' => 'permissions', 'guard_name' => 'web']);
-        Permission::create(['name' => 'permissions.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'permissions.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'permissions.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'permissions.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'roles', 'guard_name' => 'web']);
-        Permission::create(['name' => 'roles.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'roles.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'roles.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'roles.destroy', 'guard_name' => 'web']);
-        Permission::create(['name' => 'users', 'guard_name' => 'web']);
-        Permission::create(['name' => 'users.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'users.import', 'guard_name' => 'web']);
-        Permission::create(['name' => 'users.show', 'guard_name' => 'web']);
-        Permission::create(['name' => 'users.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'users.destroy', 'guard_name' => 'web']);
 
         Permission::create(['name' => 'catalogos', 'guard_name' => 'web']);
         Permission::create(['name' => 'categorias', 'guard_name' => 'web']);
@@ -90,5 +22,71 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'categorias.show', 'guard_name' => 'web']);
         Permission::create(['name' => 'categorias.edit', 'guard_name' => 'web']);
         Permission::create(['name' => 'categorias.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'colores', 'guard_name' => 'web']);
+        Permission::create(['name' => 'colores.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'colores.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'colores.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'colores.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'marcas', 'guard_name' => 'web']);
+        Permission::create(['name' => 'marcas.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'marcas.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'marcas.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'marcas.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'modelos', 'guard_name' => 'web']);
+        Permission::create(['name' => 'modelos.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'modelos.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'modelos.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'modelos.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'estados', 'guard_name' => 'web']);
+        Permission::create(['name' => 'estados.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'estados.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'estados.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'estados.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'puestos', 'guard_name' => 'web']);
+        Permission::create(['name' => 'puestos.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'puestos.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'puestos.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'puestos.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'tipos-vehiculo', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-vehiculo.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-vehiculo.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-vehiculo.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-vehiculo.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'tipos-motor', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-motor.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-motor.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-motor.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-motor.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'tipos-transmision', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-transmision.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-transmision.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-transmision.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-transmision.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'unidades-medida', 'guard_name' => 'web']);
+        Permission::create(['name' => 'unidades-medida.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'unidades-medida.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'unidades-medida.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'unidades-medida.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'formas-pago', 'guard_name' => 'web']);
+        Permission::create(['name' => 'formas-pago.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'formas-pago.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'formas-pago.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'formas-pago.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'tipos-documento', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-documento.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-documento.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-documento.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'tipos-documento.destroy', 'guard_name' => 'web']);
     }
 }
