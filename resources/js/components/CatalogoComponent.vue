@@ -37,11 +37,11 @@
     </div>
     <Modal
         id="modalCatalogo"
-        :title="modal.title"
+        :title="modalForm.title"
         size="lg"
-        v-model="modal.isVisible"
+        v-model="modalForm.isVisible"
     >
-        <!-- <DynamicForm :schema="form.formSchema" :initialValues="form.initialValues" :is-reset-form="true" :errors="form.errors" @submit="submit" /> -->
+        <DynamicForm :schema="form.formSchema" :initialValues="form.initialValues" :is-reset-form="true" :errors="form.errors" @submit="submit" />
     </Modal>
 </template>
 
@@ -71,13 +71,12 @@ export default {
     setup(props) {
         const toast = useToast();
         const apiUrl = props.apiUrl;
-        const modal = ref({ title: 'Agregar ' + props.title, isVisible: false});
+        const modalForm = ref({ title: 'Agregar ' + props.title, isVisible: false});
         const state = reactive({
             laravelResponse: { meta: { per_page: 5}, data: [], links: { prev: null, next: null }},
         });
         const form = ref({
             title: 'Nuevo ' + props.title,
-            isVisible: false,
             isResetForm: false,
             initialValues: {},
             formSchema: {
@@ -98,54 +97,37 @@ export default {
         }
 
         const create = () => {
-            modal.value.title = "Crear " + props.title;
-            modal.value.isVisible = true;
-            resetForm();
-            setFieldValue('id', undefined);
+            modalForm.value.title = "Crear " + props.title;
+            modalForm.value.isVisible = true;
         };
 
         const edit = (item, index) => {
-            setValues(item);
-            setFieldValue('index', index);
-            modal.value.title = `Modificar ${props.title}: ${item.name}`;
-            modal.value.isVisible = true;
+            modalForm.value.title = `Modificar ${props.title}: ${item.name}`;
+            modalForm.value.isVisible = true;
+            form.value.initialValues = state.laravelResponse.data[index];
+            form.value.initialValues.index = index;
         };
 
-        const submit = () => {
-            correlativoForm.id === undefined ? store() : update();
+        const submit = (values) => {
+            form.value.initialValues.id == undefined ? store(values) : update(values);
         };
 
-        const setErrors = (errors) => {
-            if (errors) {
-                Object.entries(errors).forEach(([key, value]) => {
-                    setFieldError(key, value);
-                });
-            }
-        };
-
-        const store = () => {
-            axios.post(`${apiUrl}`, correlativoForm)
+        const store = (values) => {
+            axios.post(`${apiUrl}`, values)
             .then(response => {
                 state.laravelResponse.data.unshift(response.data)
-                resetForm();
+                modalForm.value.isVisible = false;
                 toast.success('Se creó: ' + response.data.name);
-            })
-            .catch(error => {
-                setErrors(error.response.data.errors);
-			});
+            });
         };
 
-        const update = () => {
-            axios.put(`${apiUrl}/${correlativoForm.id}`, correlativoForm)
+        const update = (values) => {
+            axios.put(`${apiUrl}/${values.id}`, values)
             .then(response => {
-                state.laravelResponse.data[correlativoForm.index] = response.data;
-                localStorage.setItem('td', JSON.stringify(state.laravelResponse.data))
-                resetForm();
+                state.laravelResponse.data[values.index] = response.data;
+                modalForm.value.isVisible = false;
                 toast.success(`${response.data.name} actualizado`);
-            })
-            .catch(error => {
-				setErrors(error.response.data.errors);
-			});
+            });
         };
 
         const destroy = (item, index) => {
@@ -180,10 +162,10 @@ export default {
                 fields: props.columns.filter(c => c.key != 'id').map(c => {
                     return { name: c.key, ...c}
                 })
-            }
+            };
         });
         return {
-            modal,
+            modalForm,
             state,
             form,
             index,

@@ -23,5 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::apiResource('roles', Api\RoleController::class);
 	Route::apiResource('puestos', Api\PuestoController::class);
 
+	Route::get('bitacora', App\Http\Controllers\Api\BitacoraController::class);
+	Route::get('exportar-bitacora', [App\Http\Controllers\Api\BitacoraController::class, 'export'])->name('exportar.bitacora');
 });
 

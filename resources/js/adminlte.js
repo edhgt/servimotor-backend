@@ -22,9 +22,9 @@ const app = createApp({
     }
 });
 
+app.use(Toast);
 app.use(router);
 app.use(pinia);
-app.use(Toast);
 app.directive('can', canDirective);
 
 app.mount('#app');

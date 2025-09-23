@@ -2,14 +2,16 @@
   <div class="card">
     <div class="card-header" v-if="searchable || paginable">
       <div class="card-tools">
-        <select id="per_page" name="per_page" v-model="laravelResponse.meta.per_page" class="form-select" @change="handlePerPageChange">
+        <select id="per_page" name="per_page" v-model="laravelResponse.meta.per_page" class="form-select"
+          @change="handlePerPageChange">
           <option v-for="size in [5, 10, 15, 20, 50, 100, 150, 200, 500, 1000]" :key="size" :value="size">
             {{ size }} por página
           </option>
         </select>
       </div>
       <div class="input-group w-50" v-if="searchable">
-        <input id="search" name="search" type="search" v-model="searchQuery" placeholder="Buscar..." class="form-control" />
+        <input id="search" name="search" type="search" v-model="searchQuery" placeholder="Buscar..."
+          class="form-control" />
       </div>
     </div>
     <div class="card-body p-0 table-responsive">
@@ -19,7 +21,9 @@
             <th scope="col" :class="column.thClass" :style="column.thStyle" v-for="column in columns" :key="column.key">
               {{ column.label }}
             </th>
-            <th v-if="$slots.actionTitle"><slot name="actionTitle"></slot></th>
+            <th v-if="$slots.actionTitle">
+              <slot name="actionTitle"></slot>
+            </th>
             <th v-else-if="containOptions">Acciones</th>
           </tr>
         </thead>
@@ -28,7 +32,7 @@
             <tr>
               <td v-for="column in columns" :key="column.key">
                 <slot :name="column.key" :value="item[column.key]" :item="item">
-                  <template v-if="column.key.includes('_at')">{{formatDate(item[column.key])}}</template>
+                  <template v-if="column.key.includes('_at')">{{ formatDate(item[column.key]) }}</template>
                   <template v-else-if="typeof item[column.key] === 'object'">{{ item[column.key]?.name }}</template>
                   <template v-else>{{ item[column.key] }}</template>
                 </slot>
@@ -48,14 +52,8 @@
       </table>
     </div>
   </div>
-  <Pagination
-    :from="laravelResponse.meta.from"
-    :to="laravelResponse.meta.to"
-    :per-page="laravelResponse.meta.per_page"
-    :prev="laravelResponse.links.prev"
-    :next="laravelResponse.links.next"
-    @change-page="handlePageChange"
-  ></Pagination>
+  <Pagination :from="laravelResponse.meta.from" :to="laravelResponse.meta.to" :per-page="laravelResponse.meta.per_page"
+    :prev="laravelResponse.links.prev" :next="laravelResponse.links.next" @change-page="handlePageChange"></Pagination>
 </template>
 
 <script lang="ts">
@@ -69,8 +67,10 @@ export default {
     Pagination
   },
   props: {
-    laravelResponse: { type: Object, required: true, default: {
-      data: [], meta: { per_page: 5, from: null, to: null}, links: { prev: null, next: null}}
+    laravelResponse: {
+      type: Object, required: true, default: {
+        data: [], meta: { per_page: 5, from: null, to: null }, links: { prev: null, next: null }
+      }
     },
     columns: { type: Array as () => { key: string; label: string, thClass: string, thStyle: ThHTMLAttributes }[], required: true },
     searchable: { type: Boolean, default: true },
@@ -88,13 +88,13 @@ export default {
         return laravelResponse.value.data;
       }
 
-    const query = searchQuery.value.toLowerCase();
+      const query = searchQuery.value.toLowerCase();
       return laravelResponse.value.data.filter((item) =>
-      props.columns.some((column) => {
-        const value = item[column.key];
-        if (value == null) return false;
-        return value.toString().toLowerCase().includes(query);
-      }));
+        props.columns.some((column) => {
+          const value = item[column.key];
+          if (value == null) return false;
+          return value.toString().toLowerCase().includes(query);
+        }));
     });
 
     const handlePageChange = (url: string) => {

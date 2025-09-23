@@ -40,7 +40,6 @@
         :title="modalFormLocalUserCreate.title"
         size="xl"
         v-model="modalFormLocalUserCreate.isVisible"
-        :scrollable="true"
         >
         <DynamicForm :schema="modalFormLocalUserCreate.formSchema" :initialValues="modalFormLocalUserCreate.initialValues" :is-reset-form="modalFormLocalUserCreate.isResetForm" :errors="modalFormLocalUserCreate.errors" @submit="submit" />
     </Modal>
@@ -196,6 +195,7 @@ export default {
                     {
                         label: 'Rol',
                         name: 'roles',
+                        labelField: 'name',
                         as: 'select',
                         rules: 'required',
                         col: 6,

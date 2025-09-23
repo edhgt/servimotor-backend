@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class Cita extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
 
     protected $fillable = [
         'fecha',
@@ -19,6 +23,11 @@ class Cita extends Model
         'sucursal_id',
         'estado_id',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logFillable()->logOnlyDirty();
+    }
 
     public function cliente(): BelongsTo
     {

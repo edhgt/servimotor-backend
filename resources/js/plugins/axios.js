@@ -1,31 +1,31 @@
 import axios from 'axios';
-import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
+import '@bprogress/core/css';
+import { BProgress } from '@bprogress/core';
 import { useToast } from 'vue-toastification';
 
 const toast = useToast();
 let isSessionExpired = false;
 
-// Configuración opcional de NProgress
-NProgress.configure({ showSpinner: false }); // Opcional: oculta el spinner
+// Configuración opcional de BProgress
+BProgress.configure({ showSpinner: false }); // Opcional: oculta el spinner
 
 // Interceptor de solicitud
 axios.interceptors.request.use(config => {
-    NProgress.start();
+    BProgress.start();
     return config;
 }, error => {
-    NProgress.done(true);
+    BProgress.done(true);
     return Promise.reject(error);
 });
 
 // Interceptor de respuesta
 axios.interceptors.response.use(
     response => {
-        NProgress.done(true);
+        BProgress.done(true);
         return response;
     },
     error => {
-        NProgress.done(true);
+        BProgress.done(true);
 
         let message = error?.response?.data?.message ?? 'Error inesperado';
         

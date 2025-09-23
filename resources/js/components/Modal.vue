@@ -1,6 +1,7 @@
 <template>
-  <div :id="id" ref="modalRef" class="modal fade" aria-labelledby="modalLabel">
-    <div class="modal-dialog" :class="['modal-' + size, centered? 'modal-dialog-centered' : null, scrollable ? 'modal-dialog-scrollable' : null]">
+  <div :id="id" ref="modalRef" class="modal" aria-labelledby="modalLabel">
+    <div class="modal-dialog"
+      :class="['modal-' + size, centered ? 'modal-dialog-centered' : null, scrollable ? 'modal-dialog-scrollable' : null]">
       <div class="modal-content">
         <div class="modal-header">
           <slot class="modal-title" name="header" id="modalLabel" v-if="$slots.header"></slot>
@@ -20,27 +21,27 @@
 </template>
 
 <script>
-import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue';
 import { Modal } from 'bootstrap';
 
 export default {
   name: 'Modal',
   props: {
-    id: { type: String, required: true},
+    id: { type: String, required: true },
     title: { type: String, required: false, default: 'Modal Title' },
     size: { type: String, default: 'md', validator: value => ['sm', 'md', 'lg', 'xl', 'fullscreen'].includes(value) },
     modelValue: { type: Boolean, default: false },
     autoClose: { type: Boolean, default: true },
     scrollable: { type: Boolean, default: false },
-    backdrop: { type: [Boolean, String], default: true, validator: (value) => typeof value === 'boolean' || value === 'static',},
-    keyboard: { type: [Boolean], default: true},
-    centered: { type: [Boolean], default: false},
+    backdrop: { type: [Boolean, String], default: true, validator: (value) => typeof value === 'boolean' || value === 'static', },
+    keyboard: { type: [Boolean], default: false },
+    centered: { type: [Boolean], default: false },
   },
   setup(props, { emit }) {
     const modalRef = ref(null);
     let modalInstance = null;
 
-    const closeModal = (event) => {
+    const closeModal = () => {
       if (modalInstance) {
         modalInstance.hide();
         emit('update:modelValue', false);
@@ -48,7 +49,15 @@ export default {
     };
 
     watch(() => props.modelValue, (newVal) => {
-      newVal ? modalInstance.show() : modalInstance.hide();
+      nextTick(() => {
+        if (modalInstance) {
+          if (newVal) {
+            modalInstance.show();
+          } else {
+            modalInstance.hide();
+          }
+        }
+      });
     });
 
     onMounted(() => {
@@ -57,11 +66,9 @@ export default {
         focus: true,
         keyboard: props.keyboard,
       });
-
       if (props.modelValue) {
         modalInstance.show();
       }
-
       modalRef.value.addEventListener('hidden.bs.modal', closeModal);
     });
 

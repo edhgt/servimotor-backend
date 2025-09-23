@@ -50,7 +50,7 @@
                 </td>
                 <td style="width: 90%">
                   <template v-for="(value, key) in item.properties[clave]" :key="value">
-                    <span>{{ key }}: {{ value ? value : "null" }}</span>
+                    <span class="me-2">{{ key }}: {{ value ? value : "null" }}</span>
                   </template>
                 </td>
               </tr>
@@ -59,11 +59,6 @@
           <tr v-else>
             <td colspan="2"><strong>Sin propiedades afectadas</strong></td>
           </tr>
-          <ul v-for="(value, key) in item.properties[clave]" :key="value">
-            <li >
-              {{ key }}: {{ value ? value : "null" }}
-            </li>
-          </ul>
         </template>
 
       </SimplePaginatedTable>
@@ -86,15 +81,14 @@ export default {
     const tipoFiltro = ref();
     const valorFiltro = ref();
     const opcionesFiltro = ref({});
-    const laravelResponse = ref({ data: [], per_page: 5 });
+    const laravelResponse = ref({ meta: { per_page: 5}, data: [], links: { prev: null, next: null }});
+    const sinResultados = ref(false);
     const columns = [
       { key: 'id', label: 'ID' },
       { key: 'responsable', label: 'Responsable' },
       { key: 'fecha', label: 'Fecha de evento' },
-      { key: 'correlativo', label: 'Correlativo' },
       { key: 'description', label: 'Tipo de evento' },
       { key: 'subject_type', label: 'Tabla' },
-      { key: 'tipo_documento', label: 'Tipo de documento' },
       { key: 'properties', label: 'Propiedades afectadas' },
     ];
 
@@ -108,11 +102,12 @@ export default {
       const urlParams = new URLSearchParams();
       urlParams.append("columna", tipoFiltro.value.code);
       urlParams.append("valor", valorFiltro.value?.code);
-      urlParams.append("per_page", laravelResponse.value.per_page);
+      urlParams.append("per_page", laravelResponse.value.meta.per_page);
       axios.get(apiUrl, { params: urlParams}).then((response) => {
         laravelResponse.value = response.data;
         laravelResponse.value.data = laravelResponse.value.data.map((bitacora) => {
-          let properties = JSON.parse(bitacora.properties);
+          console.log(bitacora)
+          let properties = typeof bitacora.properties == 'string' ? JSON.parse(bitacora.properties) : bitacora.properties;
           let claves = Object.keys(properties);
           return {
             ...bitacora,

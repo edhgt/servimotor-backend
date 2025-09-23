@@ -1,5 +1,6 @@
 @import 'overlayscrollbars/overlayscrollbars.css';
 @import 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
 @import "admin-lte/dist/css/adminlte.min.css";
 @import "vue-toastification/dist/index.css";
 

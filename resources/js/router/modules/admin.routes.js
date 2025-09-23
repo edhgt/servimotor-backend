@@ -17,4 +17,10 @@ export default [
         component: () => import('@/pages/admin/Roles.vue'),
         meta: { title: 'Roles', permission: 'Roles' }
     },
+    {
+        path: '/bitacora',
+        name: 'Bitacora',
+        component: () => import('@/pages/admin/Bitacora.vue'),
+        meta: { title: 'Bitácora', permission: 'Bitácora'}
+    },
 ];

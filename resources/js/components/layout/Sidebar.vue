@@ -45,6 +45,7 @@ export default {
 
         const fullMenu = [
             { permission: "home", route: { name: "home" }, icon: "bi-house", label: "Inicio" },
+            { permission: "bitacora", route: { name: "Bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
             {
                 permission: "administrador", icon: "bi-person-gear", label: 'Administrador', children: [
                     { permission: "permissions", route: { name: "Permissions" }, icon: "bi-lock", label: "Permisos" },
@@ -84,7 +85,6 @@ export default {
         onMounted(() => {
             userStore.fetchUserProfile().then(() => {
                 setMenu();
-
             });
         });
 
