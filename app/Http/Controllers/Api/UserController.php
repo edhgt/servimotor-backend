@@ -46,15 +46,16 @@ class UserController extends Controller
     {
         try {
             DB::beginTransaction();
-            $user =
             $password = $request->isRandomPassword
                     ? Str::password(12, true, true, false)
                     : $request->password;
             $name = $this->setName($request);
+            $username = explode('@', $request->email);
             $user = User::create(array_merge(
                 $request->except(['roles', 'password', 'name']),
                 [
                     'name' => $name,
+                    'username' => $username[0],
                     'password' => Hash::make($password),
                     
                 ]
@@ -79,6 +80,7 @@ class UserController extends Controller
             return response()->json(new UserResource($user), 201);
         } catch (\Exception $e) {
             DB::rollBack();
+            \Log::info($e);
             return response()->json($e->getMessage(), 500);
         }
 

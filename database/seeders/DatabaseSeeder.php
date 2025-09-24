@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             $user = User::factory()->create([
                 'name' => 'Test User',
                 'email' => 'test@example.com',
+                'username' => 'test',
                 'tipo_usuario_id' => TipoUsuario::first()->id,
                 'sucursal_id' => Sucursal::factory()->create()->id
             ]);
