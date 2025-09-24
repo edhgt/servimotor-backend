@@ -95,7 +95,6 @@ export default {
     const searchQuery = ref("");
     const containOptions = toRef(props, 'containOptions');
     const columnsToFilter: Ref<Column[]>= ref([]);
-    const urlApi = ref('');
 
     const itemsFiltered = computed(() => {
       if (!searchQuery.value) {
@@ -116,16 +115,14 @@ export default {
     };
 
     const handleFilter = (url: string) => {
-      console.log(url, urlApi.value)
-      context.emit('change-page', `${urlApi.value}&${url}&per_page=${laravelResponse.value.meta.per_page}`);
+      context.emit('change-page', `${laravelResponse.value.meta.path}?page=${laravelResponse.value.meta.current_page}&${url}&per_page=${laravelResponse.value.meta.per_page}`);
     };
 
     const handlePerPageChange = () => {
-      context.emit('change-page', `${urlApi.value}&per_page=${laravelResponse.value.meta.per_page}`);
+      context.emit('change-page', `${laravelResponse.value.meta.path}?page=${laravelResponse.value.meta.current_page}&per_page=${laravelResponse.value.meta.per_page}`);
     };
 
     onMounted(() => {
-      urlApi.value = `${props.laravelResponse.meta.path}?page=${props.laravelResponse.meta.current_page}`
       columnsToFilter.value = props.columns.filter(c => (c.key != 'id' && !c.key.includes('_at')));
     });
 

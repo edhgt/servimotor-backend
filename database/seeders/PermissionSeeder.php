@@ -16,6 +16,26 @@ class PermissionSeeder extends Seeder
     {
         Permission::create(['name' => 'home', 'guard_name' => 'web']);
 
+        Permission::create(['name' => 'administrador', 'guard_name' => 'web']);
+        
+        Permission::create(['name' => 'users', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'roles', 'guard_name' => 'web']);
+        Permission::create(['name' => 'roles.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'roles.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'roles.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'roles.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'permissions', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permissions.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permissions.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permissions.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'permissions.destroy', 'guard_name' => 'web']);
+
         Permission::create(['name' => 'catalogos', 'guard_name' => 'web']);
         Permission::create(['name' => 'categorias', 'guard_name' => 'web']);
         Permission::create(['name' => 'categorias.create', 'guard_name' => 'web']);

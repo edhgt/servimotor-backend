@@ -20,7 +20,14 @@ class ClienteController extends Controller
         $query = Cliente::orderBy('id', 'DESC');
 
         if($request->has('q')) {
-            $query->where($request->column, 'LIKE', "%{$request->q}%");
+            if($request->column == 'nombre_completo') {
+                $query->orWhere('primer_nombre', 'LIKE', "%{$request->q}%")
+                    ->orWhere('segundo_nombre', 'LIKE', "%{$request->q}%")
+                    ->orWhere('primer_apellido', 'LIKE', "%{$request->q}%")
+                    ->orWhere('segundo_apellido', 'LIKE', "%{$request->q}%");
+            } else {
+                $query->where($request->column, 'LIKE', "%{$request->q}%");
+            }
         }
 
         $clientes = $query->simplePaginate($request->per_page);
