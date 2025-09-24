@@ -18,18 +18,20 @@
                 @change-page="index"
             >
                 <template #actions="{ item, index }">
-                    <button type="button" class="btn btn-primary btn-sm" title="Modificar cliente" @click="edit(item, index)" v-can="'clientes.edit'">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm" title="Deshabilitar cliente" @click="destroy(item, index)" v-if="item.deleted_at == null" v-can="'clientes.destroy'">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm" title="Habilitar cliente" @click="restore(item.id, index)" v-else>
-                        <i class="bi bi-check-square"></i>
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm" title="Agregar vehículo" @click="agregarVehiculo(item.id)" v-can="'clientes.agregar-vehiculo'">
-                        <i class="bi bi-plus-circle"></i> Agregar vehículo
-                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-sm" title="Agregar vehículo" @click="agregarVehiculo(item.id)" v-can="'clientes.agregar-vehiculo'">
+                            <i class="bi bi-plus-circle"></i> Agregar vehículo
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" title="Modificar cliente" @click="edit(item, index)" v-can="'clientes.edit'">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" title="Deshabilitar cliente" @click="destroy(item, index)" v-if="item.deleted_at == null" v-can="'clientes.destroy'">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-success btn-sm" title="Habilitar cliente" @click="restore(item.id, index)" v-else>
+                            <i class="bi bi-check-square"></i>
+                        </button>
+                    </div>
                 </template>
             </SimplePaginatedTable>
         </div>
@@ -79,7 +81,7 @@ export default {
             {key: 'id', label: 'Id'},
             {key: 'nit', label: 'Nit'},
             {key: 'nombre_completo', label: 'Nombre completo'},
-            {key: 'direccion', label: 'Dirección'},
+            {key: 'direccion', label: 'Dirección', thStyle: 'width: 20%'},
             {key: 'telefono', label: 'Teléfono'},
             {key: 'correo', label: 'Correo electrónico'},
             {key: 'created_at', label: 'Fecha creación'},

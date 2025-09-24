@@ -10,7 +10,7 @@
   @vite(['resources/css/adminlte.css'])
   @yield('css')
 </head>
-<body class="layout-fixed sidebar-expand-sm sidebar-mini bg-body-tertiary reduce-motion app-loaded">
+<body class="layout-fixed sidebar-expand-md bg-body-tertiary reduce-motion app-loaded">
   <!-- Site wrapper -->
   <div id="app" class="app-wrapper">
     <!-- Navbar -->
