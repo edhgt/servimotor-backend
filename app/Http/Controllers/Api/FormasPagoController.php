@@ -27,7 +27,7 @@ class FormasPagoController extends Controller
      */
     public function store(FormasPagoRequest $request): JsonResponse
     {
-        $formasPago = FormaPago::create($request->validated());
+        $formasPago = FormaPago::create($request->all());
 
         return response()->json(new FormasPagoResource($formasPago));
     }
@@ -43,9 +43,9 @@ class FormasPagoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FormasPagoRequest $request, FormaPago $formasPago): JsonResponse
+    public function update(Request $request, FormaPago $formasPago): JsonResponse
     {
-        $formasPago->update($request->validated());
+        $formasPago->update($request->all());
 
         return response()->json(new FormasPagoResource($formasPago));
     }

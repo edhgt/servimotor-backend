@@ -31,7 +31,7 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request): JsonResponse
     {
-        $role = Role::create($request->validated());
+        $role = Role::create($request->all());
 
         return response()->json(new RoleResource($role));
     }
@@ -47,9 +47,9 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RoleRequest $request, Role $role): JsonResponse
+    public function update(Request $request, Role $role): JsonResponse
     {
-        $role->update($request->validated());
+        $role->update($request->all());
 
         return response()->json(new RoleResource($role));
     }

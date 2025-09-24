@@ -27,7 +27,7 @@ class TiposTransmisionController extends Controller
      */
     public function store(TiposTransmisionRequest $request): JsonResponse
     {
-        $tiposTransmision = TipoTransmision::create($request->validated());
+        $tiposTransmision = TipoTransmision::create($request->all());
 
         return response()->json(new TiposTransmisionResource($tiposTransmision));
     }
@@ -43,9 +43,9 @@ class TiposTransmisionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TiposTransmisionRequest $request, TipoTransmision $tiposTransmision): JsonResponse
+    public function update(Request $request, TipoTransmision $tiposTransmision): JsonResponse
     {
-        $tiposTransmision->update($request->validated());
+        $tiposTransmision->update($request->all());
 
         return response()->json(new TiposTransmisionResource($tiposTransmision));
     }

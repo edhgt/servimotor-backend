@@ -27,7 +27,7 @@ class TiposDocumentoController extends Controller
      */
     public function store(TiposDocumentoRequest $request): JsonResponse
     {
-        $tiposDocumento = TipoDocumento::create($request->validated());
+        $tiposDocumento = TipoDocumento::create($request->all());
 
         return response()->json(new TiposDocumentoResource($tiposDocumento));
     }
@@ -43,9 +43,9 @@ class TiposDocumentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TiposDocumentoRequest $request, TipoDocumento $tiposDocumento): JsonResponse
+    public function update(Request $request, TipoDocumento $tiposDocumento): JsonResponse
     {
-        $tiposDocumento->update($request->validated());
+        $tiposDocumento->update($request->all());
 
         return response()->json(new TiposDocumentoResource($tiposDocumento));
     }

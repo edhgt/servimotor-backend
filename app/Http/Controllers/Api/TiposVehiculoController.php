@@ -27,7 +27,7 @@ class TiposVehiculoController extends Controller
      */
     public function store(TiposVehiculoRequest $request): JsonResponse
     {
-        $tiposVehiculo = TipoVehiculo::create($request->validated());
+        $tiposVehiculo = TipoVehiculo::create($request->all());
 
         return response()->json(new TiposVehiculoResource($tiposVehiculo));
     }
@@ -43,9 +43,9 @@ class TiposVehiculoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TiposVehiculoRequest $request, TipoVehiculo $tiposVehiculo): JsonResponse
+    public function update(Request $request, TipoVehiculo $tiposVehiculo): JsonResponse
     {
-        $tiposVehiculo->update($request->validated());
+        $tiposVehiculo->update($request->all());
 
         return response()->json(new TiposVehiculoResource($tiposVehiculo));
     }

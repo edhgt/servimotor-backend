@@ -10,11 +10,11 @@
   @vite(['resources/css/adminlte.css'])
   @yield('css')
 </head>
-<body class="layout-fixed sidebar-expand-sm sidebar-mini bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-sm sidebar-mini bg-body-tertiary reduce-motion app-loaded">
   <!-- Site wrapper -->
   <div id="app" class="app-wrapper">
     <!-- Navbar -->
-    <nav class="app-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="app-header navbar navbar-expand bg-body">
       <div class="container-fluid">
         <!--begin::Start Navbar Links-->
         <ul class="navbar-nav">
@@ -51,11 +51,15 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <main class="app-main" id="app-main">
+    <main class="app-main" id="main" tabindex="-1">
       <content-header></content-header>
       <div class="app-content">
         <div class="container-fluid">
-          @yield('content')   
+          <div class="row">
+            <div class="col-12">
+              @yield('content')   
+            </div>
+          </div>
         </div>
       </div>
     </main>

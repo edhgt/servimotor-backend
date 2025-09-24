@@ -35,8 +35,10 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::apiResource('unidades-medida', Api\UnidadesMedidaController::class);
 	Route::apiResource('formas-pago', Api\FormasPagoController::class);
 	Route::apiResource('tipos-documento', Api\TiposDocumentoController::class);
+	Route::apiResource('servicios', Api\ServicioController::class);
 
 	Route::apiResource('clientes', Api\ClienteController::class);
+	Route::apiResource('clientes.vehiculos', Api\VehiculoController::class);
 	Route::apiResource('vehiculos', Api\VehiculoController::class);
 
 	Route::get('bitacora', App\Http\Controllers\Api\BitacoraController::class);

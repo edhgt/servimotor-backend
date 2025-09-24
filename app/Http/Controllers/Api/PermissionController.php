@@ -27,7 +27,7 @@ class PermissionController extends Controller
      */
     public function store(PermissionRequest $request): JsonResponse
     {
-        $permission = Permission::create($request->validated());
+        $permission = Permission::create($request->all());
 
         return response()->json(new PermissionResource($permission));
     }
@@ -45,7 +45,7 @@ class PermissionController extends Controller
      */
     public function update(PermissionRequest $request, Permission $permission): JsonResponse
     {
-        $permission->update($request->validated());
+        $permission->update($request->all());
 
         return response()->json(new PermissionResource($permission));
     }

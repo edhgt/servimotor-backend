@@ -27,7 +27,7 @@ class UnidadesMedidaController extends Controller
      */
     public function store(UnidadesMedidaRequest $request): JsonResponse
     {
-        $unidadesMedida = UnidadMedida::create($request->validated());
+        $unidadesMedida = UnidadMedida::create($request->all());
 
         return response()->json(new UnidadesMedidaResource($unidadesMedida));
     }
@@ -43,9 +43,9 @@ class UnidadesMedidaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UnidadesMedidaRequest $request, UnidadMedida $unidadesMedida): JsonResponse
+    public function update(Request $request, UnidadMedida $unidadesMedida): JsonResponse
     {
-        $unidadesMedida->update($request->validated());
+        $unidadesMedida->update($request->all());
 
         return response()->json(new UnidadesMedidaResource($unidadesMedida));
     }

@@ -71,4 +71,10 @@ export default [
 		component: () => import('@/pages/catalogos/Puestos.vue'),
 		meta: { title: 'Puestos', permission: 'puestos'}
 	},
+	{
+		path: '/servicios',
+		name: 'servicios',
+		component: () => import('@/pages/catalogos/Servicios.vue'),
+		meta: { title: 'Servicios', permission: 'servicios'}
+	},
 ];

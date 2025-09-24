@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Estado;
 use Illuminate\Http\Request;
-use App\Http\Requests\EstadoRequest;
+use App\Http\Requests\EstadoStoreRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -25,9 +25,9 @@ class EstadoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EstadoRequest $request): JsonResponse
+    public function store(EstadoStoreRequest $request): JsonResponse
     {
-        $estado = Estado::create($request->validated());
+        $estado = Estado::create($request->all());
 
         return response()->json(new EstadoResource($estado));
     }
@@ -43,9 +43,9 @@ class EstadoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EstadoRequest $request, Estado $estado): JsonResponse
+    public function update(Request $request, Estado $estado): JsonResponse
     {
-        $estado->update($request->validated());
+        $estado->update($request->all());
 
         return response()->json(new EstadoResource($estado));
     }

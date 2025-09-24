@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar-wrapper" style="color: white;">
+    <div class="sidebar-wrapper">
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <template v-for="(menuItem, index) in menu" :key="menuItem.label + index">
@@ -60,6 +60,7 @@ export default {
                     { permission: "unidades-medida", route: { name: "unidades-medida" }, icon: "bi-rulers", label: "Unidades de medida" },
                     { permission: "formas-pago", route: { name: "formas-pago" }, icon: "bi-credit-card", label: "Formas de pago" },
                     { permission: "tipos-documento", route: { name: "tipos-documento" }, icon: "bi-file-earmark-text", label: "Tipos de documento" },
+                    { permission: "servicios", route: { name: "servicios" }, icon: "bi-file-earmark-text", label: "Servicios" },
                 ]
             },
             {

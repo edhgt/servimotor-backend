@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Marca;
 use Illuminate\Http\Request;
-use App\Http\Requests\MarcaRequest;
+use App\Http\Requests\MarcaStoreRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -25,9 +25,9 @@ class MarcaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MarcaRequest $request): JsonResponse
+    public function store(MarcaStoreRequest $request): JsonResponse
     {
-        $marca = Marca::create($request->validated());
+        $marca = Marca::create($request->all());
 
         return response()->json(new MarcaResource($marca));
     }
@@ -43,9 +43,9 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MarcaRequest $request, Marca $marca): JsonResponse
+    public function update(Request $request, Marca $marca): JsonResponse
     {
-        $marca->update($request->validated());
+        $marca->update($request->all());
 
         return response()->json(new MarcaResource($marca));
     }

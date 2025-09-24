@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 import './bootstrap';
 
@@ -22,9 +23,9 @@ const app = createApp({
     }
 });
 
-app.use(Toast);
 app.use(router);
 app.use(pinia);
+app.use(Toast, { timeout: 8000 });
 app.directive('can', canDirective);
 
 app.mount('#app');

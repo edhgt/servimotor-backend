@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoriaRequest;
+use App\Http\Requests\CategoriaStoreRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -25,9 +25,9 @@ class CategoriaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoriaRequest $request): JsonResponse
+    public function store(CategoriaStoreRequest $request): JsonResponse
     {
-        $categoria = Categoria::create($request->validated());
+        $categoria = Categoria::create($request->all());
 
         return response()->json(new CategoriaResource($categoria));
     }
@@ -43,9 +43,9 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoriaRequest $request, Categoria $categoria): JsonResponse
+    public function update(Request $request, Categoria $categoria): JsonResponse
     {
-        $categoria->update($request->validated());
+        $categoria->update($request->all());
 
         return response()->json(new CategoriaResource($categoria));
     }

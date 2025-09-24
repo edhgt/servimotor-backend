@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Modelo;
 use Illuminate\Http\Request;
-use App\Http\Requests\ModeloRequest;
+use App\Http\Requests\ModeloStoreRequest;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -25,9 +25,9 @@ class ModeloController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ModeloRequest $request): JsonResponse
+    public function store(ModeloStoreRequest $request): JsonResponse
     {
-        $modelo = Modelo::create($request->validated());
+        $modelo = Modelo::create($request->all());
 
         return response()->json(new ModeloResource($modelo));
     }
@@ -43,9 +43,9 @@ class ModeloController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ModeloRequest $request, Modelo $modelo): JsonResponse
+    public function update(Request $request, Modelo $modelo): JsonResponse
     {
-        $modelo->update($request->validated());
+        $modelo->update($request->all());
 
         return response()->json(new ModeloResource($modelo));
     }

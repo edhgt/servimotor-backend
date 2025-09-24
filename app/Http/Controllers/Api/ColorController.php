@@ -27,7 +27,7 @@ class ColorController extends Controller
      */
     public function store(ColorRequest $request): JsonResponse
     {
-        $color = Color::create($request->validated());
+        $color = Color::create($request->all());
 
         return response()->json(new ColorResource($color));
     }
@@ -43,9 +43,9 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ColorRequest $request, Color $color): JsonResponse
+    public function update(Request $request, Color $color): JsonResponse
     {
-        $color->update($request->validated());
+        $color->update($request->all());
 
         return response()->json(new ColorResource($color));
     }

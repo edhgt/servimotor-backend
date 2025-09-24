@@ -108,5 +108,18 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'tipos-documento.show', 'guard_name' => 'web']);
         Permission::create(['name' => 'tipos-documento.edit', 'guard_name' => 'web']);
         Permission::create(['name' => 'tipos-documento.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'servicios', 'guard_name' => 'web']);
+        Permission::create(['name' => 'servicios.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'servicios.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'servicios.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'servicios.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'clientes', 'guard_name' => 'web']);
+        Permission::create(['name' => 'clientes.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'clientes.agregar-vehiculo', 'guard_name' => 'web']);
+        Permission::create(['name' => 'clientes.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'clientes.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'clientes.destroy', 'guard_name' => 'web']);
     }
 }

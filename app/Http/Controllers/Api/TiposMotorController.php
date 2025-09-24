@@ -27,7 +27,7 @@ class TiposMotorController extends Controller
      */
     public function store(TiposMotorRequest $request): JsonResponse
     {
-        $tiposMotor = TipoMotor::create($request->validated());
+        $tiposMotor = TipoMotor::create($request->all());
 
         return response()->json(new TiposMotorResource($tiposMotor));
     }
@@ -43,9 +43,9 @@ class TiposMotorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TiposMotorRequest $request, TipoMotor $tiposMotor): JsonResponse
+    public function update(Request $request, TipoMotor $tiposMotor): JsonResponse
     {
-        $tiposMotor->update($request->validated());
+        $tiposMotor->update($request->all());
 
         return response()->json(new TiposMotorResource($tiposMotor));
     }
