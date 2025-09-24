@@ -70,6 +70,7 @@ export default {
             {key: 'nombre_completo', label: 'Nombre completo'},
             {key: 'direccion', label: 'Dirección'},
             {key: 'telefono', label: 'Teléfono'},
+            {key: 'correo', label: 'Correo electrónico'},
             {key: 'created_at', label: 'Fecha creación'},
             {key: 'updated_at', label: 'Fecha actualiación'},
         ];
@@ -100,6 +101,14 @@ export default {
                         as: 'input',
                         rules: 'required|max:255',
                         col: 6,
+                    },
+                    {
+                        label: 'Correo electrónico',
+                        name: 'correo',
+                        type: 'email',
+                        as: 'input',
+                        rules: 'email|max:255',
+                        col: 12,
                     },
                     {
                         label: 'Primer nombre',

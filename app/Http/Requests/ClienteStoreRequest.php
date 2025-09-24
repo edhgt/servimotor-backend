@@ -29,6 +29,7 @@ class ClienteStoreRequest extends FormRequest
             'segundo_apellido' => 'nullable',
             'direccion' => 'required',
             'telefono' => 'required',
+            'correo' => 'nullable',
         ];
     }
 }

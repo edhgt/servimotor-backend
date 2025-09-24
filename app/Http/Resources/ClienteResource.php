@@ -24,6 +24,7 @@ class ClienteResource extends JsonResource
             'segundo_apellido' => $this->segundo_apellido,
             'direccion' => $this->direccion,
             'telefono' => $this->telefono,
+            'correo' => $this->correo,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
