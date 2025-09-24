@@ -121,5 +121,12 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'clientes.show', 'guard_name' => 'web']);
         Permission::create(['name' => 'clientes.edit', 'guard_name' => 'web']);
         Permission::create(['name' => 'clientes.destroy', 'guard_name' => 'web']);
+
+        Permission::create(['name' => 'vehiculos', 'guard_name' => 'web']);
+        Permission::create(['name' => 'vehiculos.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'vehiculos.agregar-vehiculo', 'guard_name' => 'web']);
+        Permission::create(['name' => 'vehiculos.show', 'guard_name' => 'web']);
+        Permission::create(['name' => 'vehiculos.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'vehiculos.destroy', 'guard_name' => 'web']);
     }
 }

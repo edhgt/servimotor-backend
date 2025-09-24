@@ -254,7 +254,9 @@ export default {
         };
 
         const agregarVehiculo = (clienteId) => {
+            const cliente = state.laravelResponse.data.find(c => c.id == clienteId);
             modalFormVehiculo.value.cliente_id = clienteId;
+            modalFormVehiculo.value.title = `Nuevo vehículo para ${cliente.nombre_completo}`;
             modalFormVehiculo.value.isVisible = true;
         };
 
