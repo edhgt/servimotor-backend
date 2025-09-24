@@ -5,12 +5,12 @@
             <button class="btn btn-outline-danger" @click="destroy" v-if="cliente.deleted_at == null">Eliminar</button>
             <button class="btn btn-outline-success" @click="restore" v-else>Reestablecer</button>
         </div>
-        <ul class="nav mb-3">
+        <ul class="nav nav-underline mb-3">
             <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'clientes.show' }">Detalles</router-link>
+                <router-link class="nav-link" :to="{ name: 'clientes.show' }" exact-active-class="active" active-class="active">Detalles</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'clientes.vehiculos' }">Vehiculos</router-link>
+                <router-link class="nav-link" :to="{ name: 'clientes.vehiculos' }" exact-active-class="active" active-class="active">Vehiculos</router-link>
             </li>
         </ul>
         <table class="table table-striped-columns" v-if="route.name == 'clientes.show'">
@@ -19,8 +19,6 @@
                     <td width="15%">{{ key }}</td>
                     <td>{{ value }}</td>
                 </tr>
-                <template >
-                </template>
             </tbody>
         </table>
         <router-view v-else></router-view>
