@@ -47,7 +47,7 @@ export default {
             { permission: "bitacora", route: { name: "bitacora" }, icon: "bi-journal-text", label: "Bitácora" },
             { permission: "clientes", route: { name: "clientes" }, icon: "bi-people", label: "Clientes" },
             {
-                permission: "catalogos", icon: "bi-collection", label: 'Catalogos', children: [
+                permission: "catalogos", icon: "bi-collection", label: 'Catálogos', children: [
                     { permission: "categorias", route: { name: "categorias" }, icon: "bi-folder", label: "Categorias" },
                     { permission: "colores", route: { name: "colores" }, icon: "bi-palette", label: "Colores" },
                     { permission: "marcas", route: { name: "marcas" }, icon: "bi-r-circle", label: "Marcas" },
