@@ -16,6 +16,7 @@ class CotizacionDetalle extends Model
         'subtotal',
         'cotizacion_id',
         'producto_id',
+        'deleted_at'
     ];
 
     public function cotizacion(): BelongsTo

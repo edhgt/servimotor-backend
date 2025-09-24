@@ -16,6 +16,7 @@ class Factura extends Model
         'sucursal_id',
         'forma_pago_id',
         'estado_id',
+        'deleted_at',
     ];
 
     public function cliente(): BelongsTo

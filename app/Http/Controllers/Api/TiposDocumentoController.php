@@ -17,7 +17,7 @@ class TiposDocumentoController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposDocumentos = TipoDocumento::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $tiposDocumentos = TipoDocumento::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposDocumentoResource::collection($tiposDocumentos);
     }
@@ -43,8 +43,9 @@ class TiposDocumentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoDocumento $tiposDocumento): JsonResponse
+    public function update(Request $request, $tiposDocumento): JsonResponse
     {
+        $tiposDocumento = TipoDocumento::withTrashed()->findOrFail($tiposDocumento);
         $tiposDocumento->update($request->all());
 
         return response()->json(new TiposDocumentoResource($tiposDocumento));

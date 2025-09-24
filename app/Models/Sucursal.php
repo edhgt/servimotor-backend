@@ -20,5 +20,6 @@ class Sucursal extends Model
         'telefono',
         'correo',
         'region',
+        'deleted_at',
     ];
 }

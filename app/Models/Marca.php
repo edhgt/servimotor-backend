@@ -12,5 +12,5 @@ class Marca extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

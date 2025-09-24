@@ -19,5 +19,6 @@ class Proveedor extends Model
         'direccion',
         'correo',
         'telefono',
+        'deleted_at',
     ];
 }

@@ -15,6 +15,7 @@ class OrdenTrabajo extends Model
             'servicio_id',
             'empleado_id',
             'estado_id',
+            'deleted_at'
     ];
 
     public function ordenServicio(): BelongsTo

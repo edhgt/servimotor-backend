@@ -21,7 +21,7 @@
                     <button type="button" class="btn btn-primary btn-sm" title="Modificar cliente" @click="edit(item, index)" v-can="'clientes.edit'">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-danger btn-sm" title="Deshabilitar cliente" @click="destroy(item, index)" v-if="item.deleted_at == null" v-can="'clientes.delete'">
+                    <button type="button" class="btn btn-danger btn-sm" title="Deshabilitar cliente" @click="destroy(item, index)" v-if="item.deleted_at == null" v-can="'clientes.destroy'">
                         <i class="bi bi-trash"></i>
                     </button>
                     <button type="button" class="btn btn-success btn-sm" title="Habilitar cliente" @click="restore(item.id, index)" v-else>
@@ -333,7 +333,7 @@ export default {
         };
 
         const restore = (id, index) => {
-            axios.post(`${apiUrl}/${id}/restore`).then(() => {
+            axios.put(`${apiUrl}/${id}`).then(() => {
                 state.laravelResponse.data[index].deleted_at = null;
             });
         };

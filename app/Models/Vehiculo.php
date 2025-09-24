@@ -24,6 +24,7 @@ class Vehiculo extends Model
         'tipo_motor_id',
         'tipo_transmision_id',
         'cliente_id',
+        'deleted_at',
     ];
 
     public function marca(): BelongsTo

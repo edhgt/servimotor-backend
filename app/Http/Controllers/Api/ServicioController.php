@@ -17,7 +17,7 @@ class ServicioController extends Controller
      */
     public function index(Request $request)
     {
-        $servicios = Servicio::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $servicios = Servicio::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return ServicioResource::collection($servicios);
     }
@@ -45,6 +45,7 @@ class ServicioController extends Controller
      */
     public function update(Request $request, Servicio $servicio): JsonResponse
     {
+        $servicio = Servicio::withTrashed()->findOrFail($servicio);
         $servicio->update($request->all());
 
         return response()->json(new ServicioResource($servicio));

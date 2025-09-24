@@ -17,7 +17,7 @@ class ModeloController extends Controller
      */
     public function index(Request $request)
     {
-        $modelos = Modelo::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $modelos = Modelo::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return ModeloResource::collection($modelos);
     }
@@ -43,8 +43,9 @@ class ModeloController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Modelo $modelo): JsonResponse
+    public function update(Request $request, $modelo): JsonResponse
     {
+        $modelo = Modelo::withTrashed()->findOrFail($modelo);
         $modelo->update($request->all());
 
         return response()->json(new ModeloResource($modelo));

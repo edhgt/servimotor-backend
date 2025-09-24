@@ -19,6 +19,7 @@ class Producto extends Model
         'precio_costo',
         'categoria_id',
         'unidad_medida_id',
+        'deleted_at',
     ];
 
     public function categoria(): BelongsTo

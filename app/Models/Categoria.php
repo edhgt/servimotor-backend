@@ -16,7 +16,7 @@ class Categoria extends Model
     use SoftDeletes;
     use LogsActivity;
 
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 
     protected static $recordEvents = ['updated', 'deleted'];
 

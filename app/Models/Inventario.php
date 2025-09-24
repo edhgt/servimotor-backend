@@ -19,6 +19,7 @@ class Inventario extends Model
         'existencia_maxima',
         'producto_id',
         'sucursal_id',
+        'deleted_at',
     ];
 
     public function producto(): BelongsTo

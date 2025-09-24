@@ -17,7 +17,7 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
-        $permissions = Permission::orderBy('id', 'desc')->simplePaginate($request->per_page);
+        $permissions = Permission::orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return PermissionResource::collection($permissions);
     }

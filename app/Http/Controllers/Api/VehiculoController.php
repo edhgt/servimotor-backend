@@ -18,7 +18,7 @@ class VehiculoController extends Controller
      */
     public function index(Request $request)
     {
-        $vehiculos = Vehiculo::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $vehiculos = Vehiculo::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return VehiculoResource::collection($vehiculos);
     }
@@ -44,8 +44,9 @@ class VehiculoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vehiculo $vehiculo): JsonResponse
+    public function update(Request $request, $vehiculo): JsonResponse
     {
+        $vehiculo = Vehiculo::withTrashed()->findOrFail($vehiculo);
         $vehiculo->update($request->all());
 
         return response()->json(new VehiculoResource($vehiculo));

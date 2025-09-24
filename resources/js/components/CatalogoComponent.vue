@@ -146,7 +146,7 @@ export default {
         };
 
         const restore = (id, index) => {
-            axios.put(`${apiUrl}/${id}/restore`, {
+            axios.put(`${apiUrl}/${id}`, {
                 deleted_at: null
             })
             .then((response) => {

@@ -22,6 +22,7 @@ class Cita extends Model
         'empleado_id',
         'sucursal_id',
         'estado_id',
+        'deleted_at'
     ];
 
     public function getActivitylogOptions(): LogOptions

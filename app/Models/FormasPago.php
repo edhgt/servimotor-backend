@@ -29,7 +29,7 @@ class FormasPago extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 
 
     /**

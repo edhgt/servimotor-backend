@@ -13,5 +13,5 @@ class UnidadMedida extends Model
     use SoftDeletes;
 
     protected $table = 'unidades_medida';
-    protected $fillable = ['nombre', 'simbolo'];
+    protected $fillable = ['nombre', 'simbolo', 'deleted_at'];
 }

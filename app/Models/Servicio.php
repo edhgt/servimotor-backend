@@ -16,5 +16,6 @@ class Servicio extends Model
         'nombre',
         'descripcion',
         'precio_estandar',
+        'deleted_at',
     ];
 }

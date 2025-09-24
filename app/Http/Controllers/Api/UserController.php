@@ -16,6 +16,8 @@ use App\Models\Empleado;
 use App\Models\User;
 use App\Notifications\UserCreatedAccount;
 
+use function PHPUnit\Framework\isNull;
+
 class UserController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::with('empleado')->orderBy('id', 'DESC');
+        $query = User::withTrashed()->with('empleado')->orderBy('id', 'DESC');
         
         if($request->has('q')) {
             $query->where($request->column, 'LIKE', "%{$request->q}%");
@@ -101,14 +103,23 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user): JsonResponse
+    public function update(Request $request, $user): JsonResponse
     {
-        $name = $this->setName($request);
-        $user->update(array_merge(
-            ['name' => $name],
-            $request->except('name')
-        ));
-        Empleado::findOrFail($request->empleado['id'])->update($request->all());
+        $user = User::withTrashed()->findOrFail($user);
+
+        if($user->trashed() && isNull($request->deleted_at)) {
+            $user->restore();
+        } else {
+            $name = $this->setName($request);
+            $user->update(array_merge(
+                ['name' => $name],
+                $request->except('name')
+            ));
+
+            if($user->tipoUsuario->nombre != 'Cliente') {
+                Empleado::findOrFail($request->empleado['id'])->update($request->all());
+            }
+        }
 
         return response()->json(new UserResource($user));
     }

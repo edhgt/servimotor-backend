@@ -16,6 +16,7 @@ class IngresoDetalle extends Model
         'subtotal',
         'ingreso_id',
         'producto_id',
+        'deleted_at',
     ];
 
     public function ingreso(): BelongsTo

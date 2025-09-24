@@ -18,6 +18,7 @@ class OrdenServicio extends Model
             'cliente_id',
             'ingreado_por',
             'recibido_por',
+            'deleted_at'
     ];
 
     public function estado(): BelongsTo

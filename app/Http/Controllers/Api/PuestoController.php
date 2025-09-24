@@ -17,7 +17,7 @@ class PuestoController extends Controller
      */
     public function index(Request $request)
     {
-        $puestos = Puesto::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $puestos = Puesto::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return PuestoResource::collection($puestos);
     }
@@ -43,8 +43,9 @@ class PuestoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Puesto $puesto): JsonResponse
+    public function update(Request $request, $puesto): JsonResponse
     {
+        $puesto = Puesto::withTrashed()->findOrFail($puesto);
         $puesto->update($request->all());
 
         return response()->json(new PuestoResource($puesto));

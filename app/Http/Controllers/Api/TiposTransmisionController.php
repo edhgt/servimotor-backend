@@ -17,7 +17,7 @@ class TiposTransmisionController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposTransmisions = TipoTransmision::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $tiposTransmisions = TipoTransmision::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposTransmisionResource::collection($tiposTransmisions);
     }
@@ -45,6 +45,7 @@ class TiposTransmisionController extends Controller
      */
     public function update(Request $request, TipoTransmision $tiposTransmision): JsonResponse
     {
+        $tiposTransmision = TipoTransmision::withTrashed()->findOrFail($tiposTransmision);
         $tiposTransmision->update($request->all());
 
         return response()->json(new TiposTransmisionResource($tiposTransmision));

@@ -17,7 +17,7 @@ class ColorController extends Controller
      */
     public function index(Request $request)
     {
-        $colors = Color::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $colors = Color::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return ColorResource::collection($colors);
     }
@@ -43,8 +43,9 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Color $color): JsonResponse
+    public function update(Request $request, $color): JsonResponse
     {
+        $color = Color::withTrashed()->findOrFail($color);
         $color->update($request->all());
 
         return response()->json(new ColorResource($color));

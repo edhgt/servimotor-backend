@@ -23,6 +23,7 @@ class Cliente extends Model
         'telefono',
         'correo',
         'user_id',
+        'deleted_at'
     ];
 
     public function getNombreCompletoAttribute()

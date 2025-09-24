@@ -13,5 +13,5 @@ class TipoDocumento extends Model
     use SoftDeletes;
 
     protected $table = 'tipos_documento';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

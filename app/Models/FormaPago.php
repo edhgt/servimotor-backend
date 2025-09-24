@@ -10,5 +10,5 @@ class FormaPago extends Model
     use SoftDeletes;
 
     protected $table = 'formas_pago';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

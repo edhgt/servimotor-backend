@@ -17,7 +17,7 @@ class TiposMotorController extends Controller
      */
     public function index(Request $request)
     {
-        $tiposMotors = TipoMotor::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $tiposMotors = TipoMotor::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return TiposMotorResource::collection($tiposMotors);
     }
@@ -43,8 +43,9 @@ class TiposMotorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoMotor $tiposMotor): JsonResponse
+    public function update(Request $request, $tiposMotor): JsonResponse
     {
+        $tiposMotor = TipoMotor::withTrashed()->findOrFail($tiposMotor);
         $tiposMotor->update($request->all());
 
         return response()->json(new TiposMotorResource($tiposMotor));

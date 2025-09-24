@@ -27,6 +27,7 @@ class Empleado extends Model
         'puesto_id',
         'sucursal_id',
         'user_id',
+        'deleted_at',
     ];
 
     public function getNombreCompletoAttribute()

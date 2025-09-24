@@ -10,5 +10,5 @@ class TipoUsuario extends Model
     use SoftDeletes;
 
     protected $table = 'tipos_usuario';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

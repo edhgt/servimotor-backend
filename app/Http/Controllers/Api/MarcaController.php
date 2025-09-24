@@ -17,7 +17,7 @@ class MarcaController extends Controller
      */
     public function index(Request $request)
     {
-        $marcas = Marca::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $marcas = Marca::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return MarcaResource::collection($marcas);
     }
@@ -43,8 +43,9 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Marca $marca): JsonResponse
+    public function update(Request $request, $marca): JsonResponse
     {
+        $marca = Marca::withTrashed()->findOrFail($marca);
         $marca->update($request->all());
 
         return response()->json(new MarcaResource($marca));

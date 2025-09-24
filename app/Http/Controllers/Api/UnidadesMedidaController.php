@@ -17,7 +17,7 @@ class UnidadesMedidaController extends Controller
      */
     public function index(Request $request)
     {
-        $unidadesMedidas = UnidadMedida::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $unidadesMedidas = UnidadMedida::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return UnidadesMedidaResource::collection($unidadesMedidas);
     }
@@ -43,8 +43,9 @@ class UnidadesMedidaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UnidadMedida $unidadesMedida): JsonResponse
+    public function update(Request $request, $unidadesMedida): JsonResponse
     {
+        $unidadesMedida = UnidadMedida::withTrashed()->findOrFail($unidadesMedida);
         $unidadesMedida->update($request->all());
 
         return response()->json(new UnidadesMedidaResource($unidadesMedida));

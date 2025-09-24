@@ -17,6 +17,7 @@ class FacturaDetalles extends Model
         'subtotal',
         'factura_id',
         'producto_id',
+        'deleted_at',
     ];
 
     public function factura(): BelongsTo

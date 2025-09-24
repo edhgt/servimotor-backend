@@ -13,5 +13,5 @@ class TipoMotor extends Model
     use SoftDeletes;
 
     protected $table = 'tipos_motor';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

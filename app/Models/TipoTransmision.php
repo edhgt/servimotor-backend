@@ -13,5 +13,5 @@ class TipoTransmision extends Model
     use SoftDeletes;
 
     protected $table = 'tipos_transmision';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

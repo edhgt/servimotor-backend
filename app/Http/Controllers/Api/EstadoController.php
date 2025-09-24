@@ -17,7 +17,7 @@ class EstadoController extends Controller
      */
     public function index(Request $request)
     {
-        $estados = Estado::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $estados = Estado::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return EstadoResource::collection($estados);
     }
@@ -43,8 +43,9 @@ class EstadoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Estado $estado): JsonResponse
+    public function update(Request $request, $estado): JsonResponse
     {
+        $estado = Estado::withTrashed()->findOrFail($estado);
         $estado->update($request->all());
 
         return response()->json(new EstadoResource($estado));

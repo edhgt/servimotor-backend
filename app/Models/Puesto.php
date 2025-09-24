@@ -9,5 +9,5 @@ class Puesto extends Model
 {
     use SoftDeletes;
     
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'deleted_at'];
 }

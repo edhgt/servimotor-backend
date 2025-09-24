@@ -17,7 +17,7 @@ class CategoriaController extends Controller
      */
     public function index(Request $request)
     {
-        $categorias = Categoria::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $categorias = Categoria::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return CategoriaResource::collection($categorias);
     }
@@ -43,8 +43,9 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria): JsonResponse
+    public function update(Request $request, $categoria): JsonResponse
     {
+        $categoria = Categoria::withTrashed()->findOrFail($categoria);
         $categoria->update($request->all());
 
         return response()->json(new CategoriaResource($categoria));

@@ -17,7 +17,7 @@ class FormasPagoController extends Controller
      */
     public function index(Request $request)
     {
-        $formasPagos = FormaPago::orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $formasPagos = FormaPago::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
 
         return FormasPagoResource::collection($formasPagos);
     }
@@ -43,8 +43,9 @@ class FormasPagoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FormaPago $formasPago): JsonResponse
+    public function update(Request $request, $formasPago): JsonResponse
     {
+        $formasPago = FormaPago::withTrashed()->findOrFail($formasPago);
         $formasPago->update($request->all());
 
         return response()->json(new FormasPagoResource($formasPago));

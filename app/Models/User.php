@@ -34,6 +34,7 @@ class User extends Authenticatable
         'password',
         'tipo_usuario_id',
         'sucursal_id',
+        'deleted_at',
     ];
 
     /**

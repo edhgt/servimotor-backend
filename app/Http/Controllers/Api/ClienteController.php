@@ -56,8 +56,9 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente): JsonResponse
+    public function update(Request $request, $cliente): JsonResponse
     {
+        $cliente = Cliente::withTrashed()->findOrFail($cliente);
         $cliente->update($request->all());
 
         return response()->json(new ClienteResource($cliente));
