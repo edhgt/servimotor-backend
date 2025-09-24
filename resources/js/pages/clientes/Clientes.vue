@@ -17,6 +17,9 @@
                 :tiene-busqueda-avanzada="true"
                 @change-page="index"
             >
+                <template #nombre_completo="{ value, item}">
+                    <router-link :to="{ name: 'clientes.show', params: { id: item.id}}">{{value}}</router-link>
+                </template>
                 <template #actions="{ item, index }">
                     <div class="btn-group">
                         <button type="button" class="btn btn-success btn-sm" title="Agregar vehículo" @click="agregarVehiculo(item.id)" v-can="'clientes.agregar-vehiculo'">

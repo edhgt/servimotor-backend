@@ -34,7 +34,7 @@
               <td v-for="column in columns" :key="column.key">
                 <slot :name="column.key" :value="item[column.key]" :item="item">
                   <template v-if="column.key.includes('_at')">{{ formatDate(item[column.key]) }}</template>
-                  <template v-else-if="typeof item[column.key] === 'object'">{{ item[column.key]?.name }}</template>
+                  <template v-else-if="typeof item[column.key] === 'object'">{{ item[column.key]?.nombre || item[column.key]?.name}}</template>
                   <template v-else>{{ item[column.key] }}</template>
                 </slot>
               </td>

@@ -16,9 +16,20 @@ class VehiculoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, $cliente)
     {
-        $vehiculos = Vehiculo::withTrashed()->orderBy('id', 'DESC')->simplePaginate($request->per_page);
+        $vehiculos = Vehiculo::withTrashed()
+            ->with([
+                'marca:id,nombre',
+                'modelo:id,nombre',
+                'color:id,nombre',
+                'tipoVehiculo:id,nombre',
+                'tipoMotor:id,nombre',
+                'tipoTransmision:id,nombre',
+            ])
+            ->orderBy('id', 'DESC')
+            ->where('cliente_id', $cliente)
+            ->simplePaginate($request->per_page);
 
         return VehiculoResource::collection($vehiculos);
     }

@@ -6,23 +6,23 @@ import { useToast } from 'vue-toastification';
 const toast = useToast();
 let isSessionExpired = false;
 
-//BProgress.configure({ showSpinner: false });
+BProgress.configure({ showSpinner: false });
 
 axios.interceptors.request.use(config => {
-    //BProgress.start();
+    BProgress.start();
     return config;
 }, error => {
-    //BProgress.done(true);
+    BProgress.done(true);
     return Promise.reject(error);
 });
 
 axios.interceptors.response.use(
     response => {
-        //BProgress.done(true);
+        BProgress.done(true);
         return response;
     },
     error => {
-        //BProgress.done(true);
+        BProgress.done(true);
 
         let message = error?.response?.data?.message ?? 'Error inesperado';
         
