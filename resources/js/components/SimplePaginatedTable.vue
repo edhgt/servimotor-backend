@@ -115,6 +115,11 @@ export default {
     };
 
     const handleFilter = (url: string) => {
+      if(url == null) {
+        handlePerPageChange();
+        return;
+      }
+      
       context.emit('change-page', `${laravelResponse.value.meta.path}?page=${laravelResponse.value.meta.current_page}&${url}&per_page=${laravelResponse.value.meta.per_page}`);
     };
 

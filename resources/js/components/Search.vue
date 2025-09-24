@@ -2,14 +2,14 @@
     <div>
         <form class="input-group mb-3 float-end" @submit.prevent="emitParams">
             <label class="me-2" for="columnasSelect">Búsqueda avanzada</label>
-            <select v-model="column" class="form-select form-select-sm" required
+            <select v-model="column" class="form-select" required
                 id="columnasSelect">
                 <option :value="columna.key" v-for="columna in columnas" :key="columna.key">
                     {{ columna.label }}
                 </option>
             </select>
-            <input class="form-control form-control-sm" v-model="q" type="search" required>
-            <button type="submit" class="btn btn-primary btn-sm">
+            <input class="form-control w-50" v-model="q" type="search" required>
+            <button type="submit" class="btn btn-primary">
                 <i class="bi bi-search"></i>
             </button>
             <button v-if="q != null" class="btn-close" type="button" title="Cancelar búsqueda"
@@ -31,6 +31,8 @@ const q = ref(null)
 const emitParams = function (event) {
     if (event?.target.dataset.close) {
         q.value = null
+        emit('setData', null);
+        return;
     }
     emit('setData', `column=${column.value}&q=${q.value}`);
 }
